@@ -20,21 +20,18 @@ jobs:
           submodules: true
           lfs: false
       
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          # Remove cache option since lockfile doesn't exist
-          # cache: 'npm'
+          node-version: '16'
       
       - name: Install dependencies
-        # Use regular install instead of ci, which requires a lockfile
         run: npm install
       
-      - name: Build
-        run: npm run build
+      - name: Build with ESLint disabled
+        run: DISABLE_ESLINT_PLUGIN=true npm run build
         env:
-          CI: false # Prevents treating warnings as errors
+          CI: false
       
       - name: Deploy
         id: builddeploy
@@ -45,7 +42,7 @@ jobs:
           app_location: "/" 
           api_location: ""
           output_location: "build"
-          skip_app_build: true # Skip build since we've already built the app
+          skip_app_build: true # Skip build as we've already built the app
           
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

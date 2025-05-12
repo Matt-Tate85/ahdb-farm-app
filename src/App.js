@@ -1,72 +1,65 @@
-import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+// src/App.jsx
 
-// Common components
-import Header from './components/common/Header';
-import Navigation from './components/common/Navigation';
-import SideMenu from './components/common/SideMenu';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // You may need to install this package
+import { SectorProvider } from './contexts/SectorContext';
+import { DeviceProvider } from './contexts/DeviceContext';
 
-// Main tab pages
+// Layout components
+import Header from './components/layout/Header';
+import Navigation from './components/layout/Navigation';
+import Footer from './components/layout/Footer';
+
+// Page components
 import Dashboard from './pages/Dashboard';
 import FieldCheck from './pages/FieldCheck';
-import Advisor from './pages/Advisor';
 import Market from './pages/Market';
-import MyFarm from './pages/MyFarm';
-import Tools from './pages/Tools';
 import Events from './pages/Events';
 import Library from './pages/Library';
-
-// Side menu pages
-import FarmRecord from './pages/FarmRecord';
-import Farmbench from './pages/Farmbench';
-import KnowledgeLibrary from './pages/KnowledgeLibrary';
-import ResearchProjects from './pages/ResearchProjects';
-import MonitorFarm from './pages/MonitorFarm';
-import EventsNearMe from './pages/EventsNearMe';
-import ToolsCalculators from './pages/ToolsCalculators';
+import Tools from './pages/Tools';
+import Assistant from './pages/Assistant';
 import Settings from './pages/Settings';
+import NotFound from './pages/NotFound';
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleSideMenu = () => {
-    setMenuOpen(prev => !prev);
-  };
-
+const App = () => {
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
-      <Header toggleSideMenu={toggleSideMenu} />
-      
-      <main className="flex-1 overflow-y-auto">
-        <Routes>
-          {/* Main tab routes */}
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/home" element={<Dashboard />} />
-          <Route path="/field-check" element={<FieldCheck />} />
-          <Route path="/advice" element={<Advisor />} />
-          <Route path="/market" element={<Market />} />
-          <Route path="/my-farm" element={<MyFarm />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/library" element={<Library />} />
+    <SectorProvider>
+      <DeviceProvider>
+        <Router>
+          <Helmet>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <meta name="theme-color" content="#ffffff" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <title>AHDB FarmAssist</title>
+          </Helmet>
           
-          {/* Side menu routes */}
-          <Route path="/farm-record" element={<FarmRecord />} />
-          <Route path="/farmbench" element={<Farmbench />} />
-          <Route path="/knowledge-library" element={<KnowledgeLibrary />} />
-          <Route path="/research-projects" element={<ResearchProjects />} />
-          <Route path="/monitor-farm" element={<MonitorFarm />} />
-          <Route path="/events-near-me" element={<EventsNearMe />} />
-          <Route path="/tools-calculators" element={<ToolsCalculators />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </main>
-      
-      <Navigation />
-      
-      <SideMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-    </div>
+          <div className="flex flex-col min-h-screen bg-gray-50">
+            <Header />
+            
+            <main className="flex-grow">
+              <div className="container mx-auto px-4 sm:px-6 pb-16 md:pb-4 md:pl-64 safe-area-padding">
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/field-check" element={<FieldCheck />} />
+                  <Route path="/market" element={<Market />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/library" element={<Library />} />
+                  <Route path="/tools" element={<Tools />} />
+                  <Route path="/assistant" element={<Assistant />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </main>
+            
+            <Navigation />
+            <Footer />
+          </div>
+        </Router>
+      </DeviceProvider>
+    </SectorProvider>
   );
-}
+};
 
 export default App;

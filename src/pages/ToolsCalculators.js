@@ -61,7 +61,7 @@ const ToolsCalculators = () => {
     {
       id: 'carbon-footprint',
       name: 'Carbon Footprint Calculator',
-      description: 'Measure your farm's carbon footprint and identify opportunities to reduce emissions.',
+      description: 'Measure your farm\'s carbon footprint and identify opportunities to reduce emissions.',
       category: 'environmental',
       relevantSectors: ['cereals', 'dairy', 'beef', 'pork']
     },

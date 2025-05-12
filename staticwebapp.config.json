@@ -1,3 +1,5 @@
+// staticwebapp.config.json - Azure Static Web Apps configuration for client-side routing
+
 {
   "navigationFallback": {
     "rewrite": "/index.html",

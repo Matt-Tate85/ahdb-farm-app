@@ -112,11 +112,8 @@ jobs:
       - name: Build with ESLint disabled
         run: |
           # Add script to temporarily disable ESLint
-          jq '.scripts.build = "DISABLE_ESLINT_PLUGIN=true react-scripts build"' package.json > package.json.tmp
-          mv package.json.tmp package.json
-          
-          # Build the app
-          npm run build
+          echo "Building React app with ESLint disabled..."
+          DISABLE_ESLINT_PLUGIN=true npm run build
         env:
           CI: false
       
@@ -132,18 +129,25 @@ jobs:
             ls -la build
           fi
       
+      # Echo the environment for debugging
+      - name: Debug - Environment variables
+        run: |
+          echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          
+      # Try directly uploading without using SKIP_APP_BUILD
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
+          # This is the only format that works consistently
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          # Important: The app_location should point to where the build output is
-          app_location: "/build"  # This now points to the build directory 
-          api_location: ""
-          output_location: ""  # This is empty because app_location already points to the build output
-          skip_app_build: true  # Skip build as we've already built the app
+          app_location: "/build"  # Points to the build directory
+          api_location: "" 
+          output_location: ""
           
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

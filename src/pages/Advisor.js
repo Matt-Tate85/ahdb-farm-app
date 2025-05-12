@@ -78,4 +78,50 @@ const Advisor = () => {
             <div 
               className={`max-w-3/4 rounded-lg px-4 py-2 ${
                 msg.type === 'user' 
-                  ? '
+                  ? 'rounded-br-none bg-green-600 text-white' 
+                  : 'rounded-bl-none bg-gray-100 text-gray-700'
+              }`}
+            >
+              {msg.message}
+            </div>
+          </div>
+        ))}
+        
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-100 rounded-lg rounded-bl-none px-4 py-2 flex space-x-1">
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <div className="border-t p-4 border-neutral-300">
+        <div className="flex">
+          <input
+            className="flex-1 border rounded-l-lg px-4 py-2 focus:outline-none border-neutral-300"
+            placeholder="Ask about farming advice..."
+            value={currentQuestion}
+            onChange={(e) => setCurrentQuestion(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isLoading}
+          />
+          <button 
+            className={`px-4 py-2 rounded-r-lg ${isLoading ? 'bg-gray-400' : 'bg-green-600'} text-white`}
+            onClick={sendMessage}
+            disabled={isLoading}
+          >
+            Send
+          </button>
+        </div>
+        <div className="mt-2 text-xs text-gray-700">
+          Examples: "When should I apply fertilizer?", "What's the market price for wheat?", "How much rain is expected this week?"
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Advisor;

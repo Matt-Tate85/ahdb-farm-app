@@ -20,30 +20,27 @@ jobs:
           submodules: true
           lfs: false
       
-      - name: Setup Node.js
+      - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+          cache: 'npm'
       
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       
-      - name: Build with ESLint disabled
-        run: DISABLE_ESLINT_PLUGIN=true npm run build
-        env:
-          CI: false
-      
-      - name: Deploy
+      - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"  # This was missing - specifies the deployment action
           app_location: "/" 
           api_location: ""
           output_location: "build"
-          skip_app_build: true  # Skip build as we've already built the app
+        env:
+          NODE_VERSION: '18'
+          CI: false # This prevents treating warnings as errors
           
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

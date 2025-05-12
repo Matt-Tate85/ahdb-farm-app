@@ -1,4 +1,4 @@
-// src/components/layout/Navigation.jsx
+// src/components/layout/Navigation.jsx - Fixed version without Assistant link
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';

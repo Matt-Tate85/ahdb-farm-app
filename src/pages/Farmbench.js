@@ -1,0 +1,140 @@
+import React from 'react';
+import SectorSelector from '../components/common/SectorSelector';
+import { useSector } from '../contexts/SectorContext';
+import { BarChart2, TrendingUp, Award, ArrowUp, ArrowDown } from 'lucide-react';
+
+/**
+ * Farmbench Page
+ * AHDB's farm benchmarking tool
+ */
+const Farmbench = () => {
+  const { selectedSector } = useSector();
+
+  // Sample benchmark data
+  const benchmarkData = {
+    cereals: {
+      metrics: [
+        { name: 'Yield', value: '9.2 t/ha', avg: '8.5 t/ha', status: 'above' },
+        { name: 'Variable Costs', value: '£528/ha', avg: '£550/ha', status: 'below' },
+        { name: 'Fixed Costs', value: '£642/ha', avg: '£685/ha', status: 'below' },
+        { name: 'Gross Margin', value: '£1,105/ha', avg: '£980/ha', status: 'above' }
+      ],
+      position: 'Top 25%',
+      summary: 'Your cereal enterprise is performing well, with yields above and costs below the national average.'
+    },
+    dairy: {
+      metrics: [
+        { name: 'Milk Yield', value: '8,750 litres/cow', avg: '8,100 litres/cow', status: 'above' },
+        { name: 'Feed Cost', value: '9.2 ppl', avg: '10.5 ppl', status: 'below' },
+        { name: 'Total Cost of Production', value: '28.5 ppl', avg: '30.2 ppl', status: 'below' },
+        { name: 'Margin', value: '8.0 ppl', avg: '6.3 ppl', status: 'above' }
+      ],
+      position: 'Top 25%',
+      summary: 'Your dairy enterprise is showing strong performance with good cost control and above average yields.'
+    },
+    beef: {
+      metrics: [
+        { name: 'Daily Liveweight Gain', value: '1.35 kg/day', avg: '1.15 kg/day', status: 'above' },
+        { name: 'Feed Cost', value: '£1.25/kg LWG', avg: '£1.38/kg LWG', status: 'below' },
+        { name: 'Total Cost', value: '£3.60/kg LWG', avg: '£3.85/kg LWG', status: 'below' },
+        { name: 'Margin', value: '£285/head', avg: '£215/head', status: 'above' }
+      ],
+      position: 'Top 25%',
+      summary: 'Your beef enterprise is performing well with good growth rates and cost efficiency compared to similar farms.'
+    },
+    pork: {
+      metrics: [
+        { name: 'Pigs Weaned/Sow/Year', value: '27.5', avg: '26.2', status: 'above' },
+        { name: 'Feed Conversion Ratio', value: '2.65', avg: '2.80', status: 'below' },
+        { name: 'Total Cost', value: '145p/kg DW', avg: '155p/kg DW', status: 'below' },
+        { name: 'Margin', value: '18p/kg DW', avg: '12p/kg DW', status: 'above' }
+      ],
+      position: 'Top 25%',
+      summary: 'Your pig enterprise shows strong technical performance with good breeding productivity and feed efficiency.'
+    }
+  };
+
+  const currentData = benchmarkData[selectedSector];
+
+  return (
+    <div className="p-4 space-y-4">
+      <h2 className="text-lg font-semibold text-gray-700">AHDB Farmbench</h2>
+      
+      <SectorSelector />
+      
+      <div className="bg-white rounded-lg shadow p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-medium flex items-center">
+            <Award size={18} className="mr-2 text-green-600" />
+            Your Performance
+          </h3>
+          <div className="bg-green-50 text-green-600 px-3 py-1 rounded-full text-sm font-medium">
+            {currentData.position}
+          </div>
+        </div>
+        
+        <p className="text-sm text-gray-700 mb-4">
+          {currentData.summary}
+        </p>
+        
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          {currentData.metrics.map((metric, i) => (
+            <div key={i} className="p-3 border rounded-lg">
+              <div className="text-sm font-medium">{metric.name}</div>
+              <div className="flex justify-between items-center mt-1">
+                <div className="text-xl font-semibold">{metric.value}</div>
+                <div className={`flex items-center text-xs ${
+                  metric.status === 'above' ? 'text-green-600' : 'text-blue-500'
+                }`}>
+                  {metric.status === 'above' ? <ArrowUp size={14} className="mr-1" /> : <ArrowDown size={14} className="mr-1" />}
+                  {metric.avg} avg
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <button className="w-full py-2 rounded-lg bg-blue-500 text-white">
+          View Full Benchmarking Report
+        </button>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow p-4">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-medium flex items-center">
+            <TrendingUp size={18} className="mr-2 text-blue-500" />
+            3-Year Performance Trend
+          </h3>
+        </div>
+        
+        <div className="h-64 bg-gray-50 rounded-lg flex justify-center items-center p-4 mb-4">
+          <div className="text-center text-gray-500">
+            <BarChart2 size={40} className="mx-auto mb-2 text-gray-400" />
+            <span>Performance trends chart would display here</span>
+          </div>
+        </div>
+        
+        <div className="text-sm text-gray-700">
+          <p>Your {selectedSector} enterprise has shown consistent improvement over the last 3 years, with particularly strong gains in cost efficiency. The most recent reporting period shows you performing in the top quartile compared to similar AHDB Farmbench users.</p>
+        </div>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow p-4">
+        <h3 className="font-medium mb-3">Data Upload</h3>
+        <p className="text-sm mb-3">
+          Keep your benchmarking data up to date by uploading your latest figures.
+        </p>
+        
+        <button className="w-full py-2 rounded-lg bg-green-600 text-white mb-2">
+          Upload Farm Data
+        </button>
+        
+        <p className="text-xs text-gray-500 text-center">
+          Last updated: 5 May 2025
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Farmbench;

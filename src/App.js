@@ -1,16 +1,13 @@
-// src/App.js - Direct component render without routing
+// src/App.js - Using traditional JavaScript syntax
 
 import React from 'react';
-import Dashboard from './pages/Dashboard';
 
 function App() {
-  return (
-    <div className="app">
-      <div className="container mx-auto px-4">
-        <h1 className="text-xl font-bold p-4">AHDB FarmAssist</h1>
-        <Dashboard />
-      </div>
-    </div>
+  return React.createElement(
+    'div', 
+    { style: { padding: '20px' } },
+    React.createElement('h1', null, 'AHDB FarmAssist'),
+    React.createElement('p', null, 'Testing with createElement')
   );
 }
 

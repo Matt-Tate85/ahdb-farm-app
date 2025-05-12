@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/App.jsx - Fixed version without the missing Assistant page
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -18,7 +18,7 @@ import Market from './pages/Market';
 import Events from './pages/Events';
 import Library from './pages/Library';
 import Tools from './pages/Tools';
-import Assistant from './pages/Assistant';
+// import Assistant from './pages/Assistant'; // Removed this import
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 
@@ -46,7 +46,7 @@ const App = () => {
                   <Route path="/events" element={<Events />} />
                   <Route path="/library" element={<Library />} />
                   <Route path="/tools" element={<Tools />} />
-                  <Route path="/assistant" element={<Assistant />} />
+                  {/* Removed the Assistant route */}
                   <Route path="/settings" element={<Settings />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

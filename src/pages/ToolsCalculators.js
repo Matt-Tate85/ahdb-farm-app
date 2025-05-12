@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
-import { Calculator, Calculator, Search, Star, Clock, ChevronRight, ExternalLink } from 'lucide-react';
+import { Calculator, Search, Star, Clock, ChevronRight, ExternalLink } from 'lucide-react';
 
 /**
  * ToolsCalculators Page

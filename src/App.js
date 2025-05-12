@@ -1,8 +1,8 @@
-// src/App.js - Updated to match your repository structure
+// src/App.js - Removed react-helmet dependency
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet'; // You may need to install this package
+// Removed react-helmet import
 import { SectorProvider } from './contexts/SectorContext';
 import { DeviceProvider } from './contexts/DeviceContext';
 
@@ -30,13 +30,7 @@ const App = () => {
     <SectorProvider>
       <DeviceProvider>
         <Router>
-          <Helmet>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-            <meta name="theme-color" content="#ffffff" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <title>AHDB FarmAssist</title>
-          </Helmet>
-          
+          {/* Added meta tags directly in public/index.html instead of using react-helmet */}
           <div className="flex flex-col min-h-screen bg-gray-50">
             <Header />
             

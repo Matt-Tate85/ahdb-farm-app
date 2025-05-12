@@ -1,9 +1,9 @@
-// src/App.js - Original working version
+// src/App.js - Aligned with repository structure
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import page components
+// Import page components using .js extensions to match your repo
 import Dashboard from './pages/Dashboard';
 import FieldCheck from './pages/FieldCheck';
 import Market from './pages/Market';

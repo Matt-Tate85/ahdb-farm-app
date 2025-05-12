@@ -1,9 +1,9 @@
-// src/index.js - Correct JavaScript file
+// src/index.js - With correct CSS import path
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// Temporarily comment out the CSS import until we fix the file
-// import './index.css';
+// Update the import path to point to the styles directory
+import './styles/index.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -69,7 +69,7 @@ const ResearchProjects = () => {
              selectedSector === 'dairy' ? 'Sustainable Protein Sources in Dairy Rations' :
              selectedSector === 'beef' ? 'Improving Beef Supply Chain Resilience' :
              'Novel Disease Surveillance Methods in Pig Herds',
-      institution: 'Scotland's Rural College (SRUC)',
+      institution: 'Scotland\'s Rural College (SRUC)',
       status: 'Completed',
       startDate: 'January 2023',
       endDate: 'December 2024',

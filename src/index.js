@@ -1,39 +1,38 @@
-// src/index.js - With error logging
+/* src/index.css */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+/* Global reset and base styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-// Add global error handler
-window.addEventListener('error', (event) => {
-  console.error('Global error caught:', event.error);
-});
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 
-// Log the rendering start
-console.log('Starting to render React application');
+/* App container styles */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-try {
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-  
-  console.log('React rendering completed');
-} catch (error) {
-  console.error('Error during React rendering:', error);
-  
-  // Create fallback UI if React fails to render
-  const rootElement = document.getElementById('root');
-  if (rootElement) {
-    rootElement.innerHTML = `
-      <div style="padding: 20px; max-width: 800px; margin: 0 auto; font-family: system-ui, sans-serif;">
-        <h1 style="color: red;">React Failed to Initialize</h1>
-        <p>There was an error initializing the application. Please check the console for more details.</p>
-        <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow: auto;">${error.message}</pre>
-      </div>
-    `;
+/* Basic utility classes */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
   }
 }

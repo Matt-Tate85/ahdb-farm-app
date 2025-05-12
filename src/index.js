@@ -1,17 +1,39 @@
+// src/index.js - With error logging
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './styles/index.css';
+import './index.css';
 import App from './App';
-import { SectorProvider } from './contexts/SectorContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <SectorProvider>
-        <App />
-      </SectorProvider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// Add global error handler
+window.addEventListener('error', (event) => {
+  console.error('Global error caught:', event.error);
+});
+
+// Log the rendering start
+console.log('Starting to render React application');
+
+try {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+  
+  console.log('React rendering completed');
+} catch (error) {
+  console.error('Error during React rendering:', error);
+  
+  // Create fallback UI if React fails to render
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    rootElement.innerHTML = `
+      <div style="padding: 20px; max-width: 800px; margin: 0 auto; font-family: system-ui, sans-serif;">
+        <h1 style="color: red;">React Failed to Initialize</h1>
+        <p>There was an error initializing the application. Please check the console for more details.</p>
+        <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow: auto;">${error.message}</pre>
+      </div>
+    `;
+  }
+}

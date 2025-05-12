@@ -1,23 +1,15 @@
-// src/App.js - Traditional syntax with Dashboard import
+// src/App.js - Using BasicLayout
 
 import React from 'react';
 import Dashboard from './pages/Dashboard';
+import BasicLayout from './components/layout/BasicLayout';
 
 function App() {
-  // First create the header elements
-  const header = React.createElement('h1', { className: 'text-xl font-bold p-4' }, 'AHDB FarmAssist');
+  // Create the Dashboard component
+  const dashboardComponent = React.createElement(Dashboard, null);
   
-  // Then create a container and put everything in it
-  return React.createElement(
-    'div', 
-    { className: 'app' },
-    React.createElement(
-      'div',
-      { className: 'container mx-auto px-4' },
-      header,
-      React.createElement(Dashboard, null)
-    )
-  );
+  // Wrap it in the BasicLayout
+  return React.createElement(BasicLayout, null, dashboardComponent);
 }
 
 export default App;

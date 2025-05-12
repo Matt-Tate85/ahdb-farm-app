@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
-import { Flask, ChevronRight, Filter, MapPin, Users, Clock } from 'lucide-react';
+import { Beaker, ChevronRight, Filter, MapPin, Users, Clock } from 'lucide-react';
 
 /**
  * ResearchProjects Page
@@ -92,7 +92,7 @@ const ResearchProjects = () => {
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
-            <Flask size={18} className="mr-2 text-blue-500" />
+            <Beaker size={18} className="mr-2 text-blue-500" />
             Research Projects
           </h3>
           <button 

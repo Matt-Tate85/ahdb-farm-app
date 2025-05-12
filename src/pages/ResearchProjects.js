@@ -113,4 +113,74 @@ const ResearchProjects = () => {
                   key={category.id}
                   className={`px-3 py-1 text-xs rounded-full ${
                     activeCategory === category.id 
-                      ? 'bg-blue
+                      ? 'bg-blue-500 text-white' 
+                      : 'bg-white text-gray-700 border border-gray-300'
+                  }`}
+                  onClick={() => setActiveCategory(category.id)}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        <div className="space-y-4">
+          {filteredProjects.map(project => (
+            <div key={project.id} className="border rounded-lg p-4">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="text-base font-medium">{project.title}</h4>
+                <span className={`text-xs px-2 py-1 rounded-full ${
+                  project.status === 'Active' 
+                    ? 'bg-green-50 text-green-600' 
+                    : 'bg-gray-100 text-gray-600'
+                }`}>
+                  {project.status}
+                </span>
+              </div>
+              
+              <div className="flex flex-wrap text-xs text-gray-600 mb-3 gap-y-1">
+                <div className="flex items-center mr-4">
+                  <Users size={14} className="mr-1" />
+                  {project.institution}
+                </div>
+                <div className="flex items-center">
+                  <Clock size={14} className="mr-1" />
+                  {project.startDate} - {project.endDate}
+                </div>
+              </div>
+              
+              <p className="text-sm text-gray-700 mb-3">{project.description}</p>
+              
+              <div className="flex justify-between items-center">
+                <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-full">
+                  {categories.find(cat => cat.id === project.category)?.label || 'Research'}
+                </span>
+                <button className="text-blue-500 text-sm flex items-center">
+                  View Project Details
+                  <ChevronRight size={16} className="ml-1" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div className="bg-white rounded-lg shadow p-4">
+        <h3 className="font-medium mb-3">Get Involved in Research</h3>
+        
+        <p className="text-sm text-gray-700 mb-3">
+          AHDB is always looking for farmers to participate in research trials and demonstration farms.
+          By getting involved, you can help shape future farming practices and gain early access to
+          innovative approaches.
+        </p>
+        
+        <button className="w-full py-2 rounded-lg bg-green-600 text-white">
+          Register Interest
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ResearchProjects;

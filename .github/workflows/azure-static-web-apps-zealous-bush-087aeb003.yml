@@ -120,20 +120,30 @@ jobs:
         env:
           CI: false
       
+      # Check if build directory exists and has index.html
+      - name: Verify build output
+        run: |
+          if [ ! -f "build/index.html" ]; then
+            echo "Error: build/index.html not found! Contents of build directory:"
+            ls -la build || echo "build directory doesn't exist!"
+            exit 1
+          else
+            echo "Build directory contains:"
+            ls -la build
+          fi
+      
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Use deployment_token instead of azure_static_web_apps_api_token
-          deployment_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" 
+          # Important: The app_location should point to where the build output is
+          app_location: "/build"  # This now points to the build directory 
           api_location: ""
-          output_location: "build"
-          skip_app_build: true
-          # Add fallback option to skip deployment if token is missing
-          skip_deploy_on_missing_secrets: true
+          output_location: ""  # This is empty because app_location already points to the build output
+          skip_app_build: true  # Skip build as we've already built the app
           
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -144,8 +154,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Use deployment_token instead of azure_static_web_apps_api_token
-          deployment_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "close"
-          # Add fallback option to skip deployment if token is missing
-          skip_deploy_on_missing_secrets: true

@@ -1,60 +1,48 @@
+# SectorSelector.jsx (UK English Version)
+
 import React from 'react';
 import { useSector } from '../../contexts/SectorContext';
+import { SECTOR_COLOURS } from '../../config/colours';
 
 /**
- * SectorSelector Component
- * Allows users to switch between different agricultural sectors
+ * SectorSelector - Component for selecting the agricultural sector
+ * 
+ * Allows users to switch between different farming sectors,
+ * which affects content, recommendations, and colour schemes.
+ * 
+ * @returns {JSX.Element} Rendered sector selector
  */
 const SectorSelector = () => {
-  const { selectedSector, setSelectedSector } = useSector();
-
+  const { selectedSector, setSector } = useSector();
+  
+  // Available sectors with display names
+  const sectors = [
+    { id: 'cereals', name: 'Cereals & Oilseeds' },
+    { id: 'dairy', name: 'Dairy' },
+    { id: 'beef', name: 'Beef & Lamb' },
+    { id: 'pork', name: 'Pork' }
+  ];
+  
   return (
-    <div className="bg-green-50 rounded-lg p-3 mb-4 border-l-4 border-l-green-600">
-      <div className="text-sm font-semibold text-green-600 mb-2">
-        Current AHDB Sector
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <button 
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${
-            selectedSector === 'cereals' 
-              ? 'bg-orange-500 text-white border-orange-500 font-semibold' 
-              : 'bg-white text-orange-700 border-neutral-300 font-medium'
+    <div className="flex flex-wrap gap-2 my-4">
+      {sectors.map(sector => (
+        <button
+          key={sector.id}
+          onClick={() => setSector(sector.id)}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            selectedSector === sector.id 
+              ? 'text-white' 
+              : 'text-gray-700 border border-gray-300 hover:bg-gray-50'
           }`}
-          onClick={() => setSelectedSector('cereals')}
+          style={{ 
+            backgroundColor: selectedSector === sector.id 
+              ? SECTOR_COLOURS[sector.id].main 
+              : 'transparent' 
+          }}
         >
-          Cereals & Oilseeds
+          {sector.name}
         </button>
-        <button 
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${
-            selectedSector === 'dairy' 
-              ? 'bg-blue-500 text-white border-blue-500 font-semibold' 
-              : 'bg-white text-blue-700 border-neutral-300 font-medium'
-          }`}
-          onClick={() => setSelectedSector('dairy')}
-        >
-          Dairy
-        </button>
-        <button 
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${
-            selectedSector === 'beef' 
-              ? 'bg-amber-900 text-white border-amber-900 font-semibold' 
-              : 'bg-white text-amber-800 border-neutral-300 font-medium'
-          }`}
-          onClick={() => setSelectedSector('beef')}
-        >
-          Beef & Lamb
-        </button>
-        <button 
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${
-            selectedSector === 'pork' 
-              ? 'bg-pink-500 text-white border-pink-500 font-semibold' 
-              : 'bg-white text-pink-700 border-neutral-300 font-medium'
-          }`}
-          onClick={() => setSelectedSector('pork')}
-        >
-          Pork
-        </button>
-      </div>
+      ))}
     </div>
   );
 };

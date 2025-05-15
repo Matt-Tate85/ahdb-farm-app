@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as LucideIcons from 'lucide-react';
 
-const API_KEY = 5fbc3b4e49efe87c42b2e576ae8b09b0;
+const API_KEY = '5fbc3b4e49efe87c42b2e576ae8b09b0';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 // Helper function to group forecast data by day (same as before)

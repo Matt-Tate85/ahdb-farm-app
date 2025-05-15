@@ -8,29 +8,34 @@ export const COLORS = { // Translate colours
   neutral: "#dfd5b4",
   balance: "#9db7c2",
   solid: "#7b3010",
-  confident: "#ed7013"
+  confident: "#ed7013",
+  fresh: "#c8d400",
+  gold: "#F5B81C",
+  beefgreen: "#69AC27",
+  olive: "#789A54",
+  porkblue: "#1E4E9A"
 };
 
 // Sector-specific colours
 export const SECTOR_COLORS = { // Translate colours
   cereals: {
-    main: COLORS.confident,
-    light: "#fdf0e6",
+    main: COLORS.olive,
+    light: COLORS.balance,
     text: "#b65610"
   },
   dairy: {
-    main: COLORS.ahdbBlue,
-    light: "#e6f4fc",
+    main: COLORS.gold,
+    light: COLORS.balance,
     text: "#0078b0"
   },
   beef: {
-    main: COLORS.solid,
-    light: "#f9ede7",
+    main: COLORS.beefgreen,
+    light: COLORS.balance,
     text: "#632710"
   },
   pork: {
-    main: "#d4619d", // Created this since there was no pink in the palette
-    light: "#faedf5",
+    main: COLORS.porkblue,
+    light: COLORS.balance,
     text: "#b04e81"
   }
 };
@@ -60,9 +65,10 @@ export const SIDE_MENU_ITEMS = [
   { id: 'farm-record', label: 'My Farm Record', icon: 'ClipboardList' },
   { id: 'farmbench', label: 'AHDB Farmbench', icon: 'TrendingUp' },
   { id: 'knowledge-library', label: 'AHDB Knowledge Library', icon: 'BookOpen' },
-  { id: 'research-projects', label: 'Research Projects', icon: 'FolderSearch' },
+  { id: 'research-projects', label: 'Research Projects', icon: 'folder-search' },
   { id: 'monitor-farm', label: 'Local Monitor Farm', icon: 'MapPin' },
   { id: 'events-near-me', label: 'Events Near Me', icon: 'Calendar' },
+  { id: 'tools-calculators', label: 'Tools & Calculators', icon: 'Calculator' },
   { id: 'settings', label: 'Settings', icon: 'Settings' },
   { id: 'logout', label: 'Logout', icon: 'LogOut', className: 'text-ahdb-solid' }
 ];

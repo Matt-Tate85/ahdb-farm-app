@@ -1,69 +1,52 @@
-// SectorSelector.js
+// WelcomeCard.js
 import React from 'react';
 import { useSector } from '../../contexts/SectorContext';
 import { SECTOR_COLORS } from '../../utils/constants'; // Import SECTOR_COLORS
 
 /**
- * SectorSelector Component
- * Allows users to switch between different agricultural sectors
+ * WelcomeCard Component
+ * Displays a welcome message on the dashboard
  */
-const SectorSelector = () => {
-  const { selectedSector, setSelectedSector } = useSector();
+const WelcomeCard = () => {
+  const { selectedSector } = useSector();
 
-  // Helper function to get styles based on sector and selection state
-  const getButtonStyles = (sectorId) => {
-    const isSelected = selectedSector === sectorId;
-    const colors = SECTOR_COLORS[sectorId];
+  // Get the colours for the selected sector
+  const sectorColors = SECTOR_COLORS[selectedSector];
 
-    if (!colors) {
-        // Fallback or default styles if colors are not defined for a sector
-        return isSelected
-            ? { backgroundColor: '#000', color: '#fff', borderColor: '#000' } // Default selected
-            : { backgroundColor: '#fff', color: '#000', borderColor: '#d1d5db' }; // Default unselected
-    }
-
-    return isSelected
-      ? { backgroundColor: colors.main, color: '#fff', borderColor: colors.main }
-      : { backgroundColor: colors.light, color: colors.text, borderColor: '#d1d5db' }; // Using light and text colors for unselected state
+  // Define default colours if sectorColors are not found (optional fallback)
+  const defaultColors = {
+    main: '#6da32f', // AHDB Green
+    light: '#e6f4fc', // A light background, could be adjusted
+    text: '#575756' // AHDB Text
   };
 
+  // Use sector-specific colours if available, otherwise use defaults
+  const cardBackgroundColor = sectorColors?.light || defaultColors.light;
+  const cardBorderColor = sectorColors?.main || defaultColors.main;
+  const cardTextColor = sectorColors?.text || defaultColors.text;
+  const headingTextColor = sectorColors?.main || defaultColors.main; // Use main color for heading
+
+
   return (
-    <div className="bg-green-50 rounded-lg p-3 mb-4 border-l-4 border-l-green-600">
-      <div className="text-sm font-semibold text-green-600 mb-2">
-        Current AHDB Sector
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <button
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${selectedSector === 'cereals' ? 'font-semibold' : 'font-medium'}`}
-          style={getButtonStyles('cereals')} // Apply dynamic styles
-          onClick={() => setSelectedSector('cereals')}
-        >
-          Cereals & Oilseeds
-        </button>
-        <button
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${selectedSector === 'dairy' ? 'font-semibold' : 'font-medium'}`}
-           style={getButtonStyles('dairy')} // Apply dynamic styles
-          onClick={() => setSelectedSector('dairy')}
-        >
-          Dairy
-        </button>
-        <button
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${selectedSector === 'beef' ? 'font-semibold' : 'font-medium'}`}
-           style={getButtonStyles('beef')} // Apply dynamic styles
-          onClick={() => setSelectedSector('beef')}
-        >
-          Beef & Lamb
-        </button>
-        <button
-          className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${selectedSector === 'pork' ? 'font-semibold' : 'font-medium'}`}
-           style={getButtonStyles('pork')} // Apply dynamic styles
-          onClick={() => setSelectedSector('pork')}
-        >
-          Pork
-        </button>
-      </div>
+    <div
+      className="p-4 rounded-lg border"
+      style={{
+        backgroundColor: cardBackgroundColor,
+        borderColor: cardBorderColor,
+        color: cardTextColor // Apply text color to the container
+      }}
+    >
+      <h2
+        className="text-lg font-semibold"
+        style={{ color: headingTextColor }} // Apply heading color specifically
+      >
+        Welcome, James!
+      </h2>
+      <p className="text-sm">
+        AHDB Insights for your {selectedSector === 'cereals' ? 'arable' : selectedSector} farm in Yorkshire:
+      </p>
     </div>
   );
 };
 
-export default SectorSelector;
+export default WelcomeCard;

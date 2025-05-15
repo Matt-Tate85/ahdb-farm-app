@@ -1,7 +1,7 @@
 // SectorSelector.js
 import React from 'react';
 import { useSector } from '../../contexts/SectorContext';
-import { SECTOR_COLORS } from '../../utils/constants'; // Import SECTOR_COLORS
+import { SECTOR_COLORS, COLORS } from '../../utils/constants'; // Import SECTOR_COLORS and COLORS
 
 /**
  * SectorSelector Component
@@ -28,8 +28,17 @@ const SectorSelector = () => {
   };
 
   return (
-    <div className="bg-green-50 rounded-lg p-3 mb-4 border-l-4 border-l-green-600">
-      <div className="text-sm font-semibold text-green-600 mb-2">
+    <div
+      className="rounded-lg p-3 mb-4 border-l-4" // Removed bg-green-50 and border-l-green-600
+      style={{
+        backgroundColor: COLORS.credible, // Set background to credible
+        borderLeftColor: COLORS.ahdbBlue, // Set left border color to ahdbBlue
+      }}
+    >
+      <div
+        className="text-sm font-semibold mb-2" // Removed text-green-600
+        style={{ color: COLORS.ahdbBlue }} // Set text color to ahdbBlue
+      >
         Current AHDB Sector
       </div>
       <div className="flex flex-wrap gap-2">

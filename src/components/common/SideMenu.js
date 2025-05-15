@@ -99,44 +99,6 @@ const SideMenu = ({ isOpen, onClose }) => {
             <div className="text-sm text-gray-700">Yorkshire, UK</div>
           </div>
 
-          {/* Sector Selection Section */}
-          <div className="mb-4">
-            <h3 className="text-sm font-medium mb-2 text-gray-700">AHDB Sectors</h3> {/* Keeping original text color for contrast on white */}
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => handleSectorChange('cereals')}
-                className={`py-2 px-1 text-xs rounded border ${selectedSector === 'cereals' ? 'font-semibold' : 'font-medium'}`} // Added border class
-                style={getSectorButtonStyles('cereals')} // Apply dynamic styles
-                aria-pressed={selectedSector === 'cereals'}
-              >
-                Cereals & Oilseeds
-              </button>
-              <button
-                onClick={() => handleSectorChange('dairy')}
-                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'dairy' ? 'font-semibold' : 'font-medium'}`} // Added border class
-                style={getSectorButtonStyles('dairy')} // Apply dynamic styles
-                aria-pressed={selectedSector === 'dairy'}
-              >
-                Dairy
-              </button>
-              <button
-                onClick={() => handleSectorChange('beef')}
-                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'beef' ? 'font-semibold' : 'font-medium'}`} // Added border class
-                style={getSectorButtonStyles('beef')} // Apply dynamic styles
-                aria-pressed={selectedSector === 'beef'}
-              >
-                Beef & Lamb
-              </button>
-              <button
-                onClick={() => handleSectorChange('pork')}
-                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'pork' ? 'font-semibold' : 'font-medium'}`} // Added border class
-                style={getSectorButtonStyles('pork')} // Apply dynamic styles
-                aria-pressed={selectedSector === 'pork'}
-              >
-                Pork
-              </button>
-            </div>
-          </div>
 
           {/* Main Navigation Items */}
           <ul className="space-y-1">

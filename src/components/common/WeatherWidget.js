@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import * as LucideIcons from 'lucide-react';
+import * as LucideIcons from 'lucide-react'; // Import all icons from lucide-react
 
-// Access the API key from environment variables injected by Azure Static Web Apps
-// Note: For client-side code, variables need a specific prefix like REACT_APP_
+// Replace with your actual OpenWeatherMap API key
 const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -62,8 +61,11 @@ const groupForecastByDay = (list) => {
         '13n': 'CloudSnow', // snow night
         '50d': 'Mist', // mist day
         '50n': 'Mist', // mist night
+        // Add more mappings as needed
     };
-    const LucideIconName = iconMap[mostFrequentIcon] || 'QuestionMarkCircle';
+    // Use 'HelpCircle' as the fallback icon name if the OpenWeatherMap icon is not mapped
+    const LucideIconName = iconMap[mostFrequentIcon] || 'HelpCircle';
+
 
     return {
       day: dayData.day,
@@ -94,12 +96,10 @@ const WeatherWidget = ({ location = 'Yorkshire' }) => {
       setLoading(true);
       setError(null);
       try {
-        // Use the API_KEY from environment variables
         const response = await fetch(`${BASE_URL}?q=${location}&appid=${API_KEY}&units=metric`);
 
         if (!response.ok) {
-           // Attempt to read error message from response body if available
-           const errorBody = await response.text(); // Or response.json() if API returns JSON errors
+           const errorBody = await response.text();
            throw new Error(`HTTP error! status: ${response.status} - ${errorBody}`);
         }
 
@@ -116,18 +116,17 @@ const WeatherWidget = ({ location = 'Yorkshire' }) => {
       }
     };
 
-    // Only fetch if location and API_KEY are available
     if (location && API_KEY) {
       fetchWeather();
     } else if (!API_KEY) {
        console.error("OpenWeatherMap API key is not configured.");
        setError(new Error("API key not configured. Please add REACT_APP_OPENWEATHERMAP_API_KEY to Azure Static Web App configuration."));
-       setLoading(false); // Stop loading if key is missing
+       setLoading(false);
     } else {
-        setWeatherData([]); // Clear data if location is not provided
+        setWeatherData([]);
         setLoading(false);
     }
-  }, [location]); // Rerun effect if location changes
+  }, [location]);
 
   if (loading) {
     return <div className="bg-white rounded-lg shadow p-4">Loading weather...</div>;
@@ -141,20 +140,21 @@ const WeatherWidget = ({ location = 'Yorkshire' }) => {
       return <div className="bg-white rounded-lg shadow p-4">No weather data available for {location}. Please check the location name.</div>;
   }
 
-
   return (
     <div className="bg-white rounded-lg shadow p-4">
       <h3 className="font-medium mb-2">Weather Forecast for {location}</h3>
       <div className="flex justify-between">
         {weatherData.map((day, i) => {
+            // Dynamically get the Lucide icon component
             const IconComponent = LucideIcons[day.icon];
              if (!IconComponent) {
-                console.warn(`Icon "${day.icon}" not found in LucideIcons. Using a default.`);
+                console.warn(`Icon "${day.icon}" not found in LucideIcons. Using HelpCircle as default.`);
+                // Fallback to HelpCircle if the mapped icon name is not a valid Lucide icon
                 return (
                      <div key={i} className="text-center">
                         <div className="text-xs">{day.day}</div>
                         <div className="my-1">
-                           <LucideIcons.QuestionMarkCircle size={24} />
+                           <LucideIcons.HelpCircle size={24} /> {/* Corrected Default icon */}
                         </div>
                         <div className="text-sm font-medium">{day.temp}</div>
                         <div className="text-xs text-blue-500">{day.rain}</div>

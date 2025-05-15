@@ -69,7 +69,7 @@ const SideMenu = ({ isOpen, onClose }) => {
           className="p-4 flex justify-between items-center" // Removed text-white and bg-blue-500
           style={{
             backgroundColor: COLORS.ahdbBlue, // Set background to ahdbBlue
-            color: COLORS.credible, // Set text color to credible
+            color: COLORS.white, // Set text color to credible
           }}
         >
           <span className="font-semibold">AHDB Resources</span>

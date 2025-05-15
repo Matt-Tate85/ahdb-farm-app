@@ -66,7 +66,7 @@ const FieldCheck = () => {
       <h2 className="text-lg font-semibold text-gray-700">AHDB Field Assessment Tool</h2>
       <p className="text-sm text-gray-700">
         Take or upload a photo of your {selectedSector === 'cereals' ? 'crop' : 'field/livestock'}
-        to check for issues and get AHDB recommendations.
+         to check for issues and get AHDB recommendations.
       </p>
 
       <SectorSelector />

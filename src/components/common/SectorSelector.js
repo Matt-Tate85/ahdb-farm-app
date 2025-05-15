@@ -31,7 +31,7 @@ const SectorSelector = () => {
     <div
       className="rounded-lg p-3 mb-4 border-l-4" // Removed bg-green-50 and border-l-green-600
       style={{
-        backgroundColor: COLORS.,ahdbBlue // Set background to credible
+        backgroundColor: COLORS.ahdbBlue, // Set background to credible
         borderLeftColor: COLORS.credible, // Set left border color to ahdbBlue
       }}
     >

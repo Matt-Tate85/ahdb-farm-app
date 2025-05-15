@@ -26,17 +26,17 @@ export const SECTOR_COLORS = { // Translate colours
   dairy: {
     main: COLORS.gold,
     light: COLORS.balance,
-    text: "#0078b0"
+    text: COLORS.ahdbText
   },
   beef: {
     main: COLORS.beefgreen,
     light: COLORS.balance,
-    text: "#632710"
+    text: COLORS.ahdbText
   },
   pork: {
     main: COLORS.porkblue,
     light: COLORS.balance,
-    text: "#b04e81"
+    text: COLORS.ahdbText
   }
 };
 

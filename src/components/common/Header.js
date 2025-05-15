@@ -15,7 +15,7 @@ const Header = ({ toggleSideMenu }) => {
       className="p-4 flex justify-between items-center" // Removed text-white and bg-blue-500
       style={{
         backgroundColor: COLORS.ahdbBlue, // Set background to ahdbBlue from constants
-        color: COLORS.credible, // Set text color to credible from constants
+        color: COLORS.white, // Set text color to white from constants
       }}
     >
       <div className="flex items-center space-x-2">
@@ -23,7 +23,7 @@ const Header = ({ toggleSideMenu }) => {
           onClick={toggleSideMenu}
           className="" // Removed text-white, color is set by parent header style
           aria-label="Open menu"
-          style={{ color: COLORS.credible }} // Explicitly set button color for clarity/override if needed
+          style={{ color: COLORS.white }} // Explicitly set button color for clarity/override if needed
         >
           <Menu size={24} />
         </button>
@@ -32,7 +32,7 @@ const Header = ({ toggleSideMenu }) => {
       <button
         className="" // Removed text-white, color is set by parent header style
         aria-label="Help"
-        style={{ color: COLORS.credible }} // Explicitly set button color for clarity/override if needed
+        style={{ color: COLORS.white }} // Explicitly set button color for clarity/override if needed
       >
         <HelpCircle size={24} />
       </button>

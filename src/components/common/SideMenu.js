@@ -77,7 +77,7 @@ const SideMenu = ({ isOpen, onClose }) => {
             onClick={onClose}
             className="" // Removed text-white, color is set by parent header style
             aria-label="Close menu"
-            style={{ color: COLORS.credible }} // Explicitly set button color
+            style={{ color: COLORS.white}} // Explicitly set button color
           >
             <X size={24} />
           </button>

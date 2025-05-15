@@ -69,7 +69,7 @@ export const SIDE_MENU_ITEMS = [
   { id: 'research-projects', label: 'Research Projects', icon: 'FolderSearch' },
   { id: 'monitor-farm', label: 'Local Monitor Farm', icon: 'MapPin' },
   { id: 'events-near-me', label: 'Events Near Me', icon: 'Calendar' },
-  { id: 'tools-calculators', label: 'Tools & Calculators', icon: 'Calculator' },
+  { id: 'tools', label: 'Tools & Calculators', icon: 'Calculator' },
   { id: 'settings', label: 'Settings', icon: 'Settings' },
   { id: 'logout', label: 'Logout', icon: 'LogOut', className: 'text-ahdb-solid' }
 ];

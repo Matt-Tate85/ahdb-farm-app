@@ -22,7 +22,7 @@ const getSimulatedResponse = (sector, question) => {
   // Sector-specific response templates
   const sectorResponses = {
     cereals: {
-      fertilizer: "For cereals and oilseeds, the optimal time for fertilizer application depends on crop stage and soil conditions. Based on AHDB guidance, nitrogen application should be split, with the first application at the start of spring growth (typically late February to March) and the second at stem extension (GS30-31). Soil testing is essential before application to determine exact requirements. Would you like more specific information about rates for a particular crop?",
+      fertiliser: "For cereals and oilseeds, the optimal time for fertiliser application depends on crop stage and soil conditions. Based on AHDB guidance, nitrogen application should be split, with the first application at the start of spring growth (typically late February to March) and the second at stem extension (GS30-31). Soil testing is essential before application to determine exact requirements. Would you like more specific information about rates for a particular crop?",
       pests: "Common pests in cereals include aphids, wheat bulb fly, and frit fly. AHDB recommends integrated pest management approaches, focusing on cultural controls first, followed by targeted chemical controls only when necessary. Regular crop walking to monitor pest levels is vital. Have you noticed specific pest symptoms in your crop?",
       prices: "Current cereals market prices show wheat trading at approximately £175-185/tonne for feed wheat and £190-210/tonne for milling wheat, though this varies by region. Oilseed rape is around £350-370/tonne. These are indicative figures based on recent AHDB Market Intelligence reports. Would you like me to explain price trends over recent months?",
       weather: "According to recent AHDB weather forecasts for cereal growing regions, conditions are expected to be variable with moderate rainfall. This could impact late season operations for winter cereals. What specific weather concerns do you have for your crops?"
@@ -71,8 +71,8 @@ const getSimulatedResponse = (sector, question) => {
     const sectorData = sectorResponses[sector] || {};
     
     // Match keywords to appropriate responses
-    if (q.includes('fertiliz') || q.includes('nutrient') || q.includes('feed') || q.includes('nutrition')) {
-      return sector === 'cereals' ? sectorData.fertilizer : 
+    if (q.includes('fertilis') || q.includes('nutrient') || q.includes('feed') || q.includes('nutrition')) {
+      return sector === 'cereals' ? sectorData.fertiliser : 
              sector === 'dairy' ? sectorData.nutrition : 
              sector === 'beef' ? sectorData.feeding : 
              sector === 'pork' ? sectorData.housing : commonResponses.default;
@@ -263,7 +263,7 @@ const Advisor = () => {
           </button>
         </div>
         <div className="mt-2 text-xs text-gray-700">
-          Examples: "When should I apply fertilizer?", "What's the market price for wheat?", "How much rain is expected this week?"
+          Examples: "When should I apply fertiliser?", "What's the market price for wheat?", "How much rain is expected this week?"
         </div>
       </div>
     </div>

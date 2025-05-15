@@ -2,7 +2,7 @@
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
-import { getMarketData, getMarketInsights, getStatusColorClasses } from '../utils/helpers'; // Keep 'color' in function name for consistency
+import { getMarketData, getMarketInsights, getStatusColorClasses } from '../utils/helpers';
 
 /**
  * Market Page
@@ -12,6 +12,99 @@ const Market = () => {
   const { selectedSector } = useSector();
   const marketData = getMarketData(selectedSector);
   const marketInsights = getMarketInsights(selectedSector);
+
+  // --- Simulated Farm Data for Impact Calculation ---
+  // In a real app, this would come from the user's Farm Record
+  const simulatedFarmData = {
+    cereals: { 'Feed Wheat': { area: 50, yield: 9.0 } }, // 50 hectares, 9.0 t/ha
+    dairy: { 'Farmgate Milk': { cows: 200, yield: 8500 } }, // 200 cows, 8500 litres/cow/year
+    beef: { 'R4L Steers': { head: 80, weight: 350 } }, // 80 head, 350 kg deadweight
+    pork: { 'SPP': { head: 500, weight: 80 } } // 500 head, 80 kg deadweight
+  };
+
+  // Function to calculate simulated impact
+  const calculateSimulatedImpact = (item, trend) => {
+    const farmData = simulatedFarmData[selectedSector]?.[item.item];
+    if (!farmData) return null; // No simulated data for this item/sector
+
+    let impact = 0;
+    let unit = '';
+
+    // Simplified calculation based on trend percentage or value
+    if (trend.includes('↑') || trend.includes('↓')) {
+        const change = parseFloat(trend.replace(/[^\d.-]/g, '')); // Extract number
+        if (isNaN(change)) return null;
+
+        if (selectedSector === 'cereals' && item.item.includes('Wheat')) {
+            // Assuming price is per tonne, calculate impact per hectare
+            const pricePerTonne = parseFloat(item.price.replace(/[£/tonne]/g, ''));
+             if (isNaN(pricePerTonne)) return null;
+            // Calculate change in price per tonne
+            const priceChangePerTonne = (pricePerTonne / (1 + (change / 100))) * (change / 100);
+            impact = priceChangePerTonne * farmData.yield * farmData.area;
+            unit = 'annual revenue';
+        } else if (selectedSector === 'dairy' && item.item.includes('Milk')) {
+             // Assuming price is per litre, calculate impact per year
+            const pricePerLitre = parseFloat(item.price.replace(/[p/litre]/g, '')) / 100; // Convert p to £
+             if (isNaN(pricePerLitre)) return null;
+             const priceChangePerLitre = (pricePerLitre / (1 + (change / 100))) * (change / 100);
+             impact = priceChangePerLitre * farmData.yield * farmData.cows;
+             unit = 'annual revenue';
+        } else if (selectedSector === 'beef' && item.item.includes('p/kg')) {
+             // Assuming price is per kg, calculate impact per head
+             const pricePerKg = parseFloat(item.price.replace(/[p/kg]/g, '')) / 100; // Convert p to £
+             if (isNaN(pricePerKg)) return null;
+             const priceChangePerKg = (pricePerKg / (1 + (change / 100))) * (change / 100);
+             impact = priceChangePerKg * farmData.weight * farmData.head;
+             unit = 'total value';
+        } else if (selectedSector === 'pork' && item.item.includes('p/kg')) {
+             // Assuming price is per kg, calculate impact per head
+             const pricePerKg = parseFloat(item.price.replace(/[p/kg]/g, '')) / 100; // Convert p to £
+             if (isNaN(pricePerKg)) return null;
+             const priceChangePerKg = (pricePerKg / (1 + (change / 100))) * (change / 100);
+             impact = priceChangePerKg * farmData.weight * farmData.head;
+             unit = 'total value';
+        } else if (selectedSector === 'beef' && item.item.includes('/head')) {
+             // Assuming price is per head
+             const pricePerHead = parseFloat(item.price.replace(/[£/head]/g, ''));
+             if (isNaN(pricePerHead)) return null;
+             const priceChangePerHead = (pricePerHead / (1 + (change / 100))) * (change / 100);
+             impact = priceChangePerHead * farmData.head;
+             unit = 'total value';
+        } else if (selectedSector === 'pork' && item.item.includes('/head')) {
+             // Assuming price is per head
+             const pricePerHead = parseFloat(item.price.replace(/[£/head]/g, ''));
+             if (isNaN(pricePerHead)) return null;
+             const priceChangePerHead = (pricePerHead / (1 + (change / 100))) * (change / 100);
+             impact = priceChangePerHead * farmData.head;
+             unit = 'total value';
+        }
+    } else if (trend.includes('p')) { // Handle direct price changes in pence
+         const change = parseFloat(trend.replace(/[^\d.-]/g, '')) / 100; // Convert p to £
+         if (isNaN(change)) return null;
+
+         if (selectedSector === 'dairy' && item.item.includes('Milk')) {
+             impact = change * farmData.yield * farmData.cows;
+             unit = 'annual revenue';
+         } else if (selectedSector === 'beef' && item.item.includes('p/kg')) {
+             impact = change * farmData.weight * farmData.head;
+             unit = 'total value';
+         } else if (selectedSector === 'pork' && item.item.includes('p/kg')) {
+             impact = change * farmData.weight * farmData.head;
+             unit = 'total value';
+         }
+    }
+
+
+    if (impact === 0) return null; // Don't show if no change or calculation failed
+
+    const formattedImpact = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(Math.abs(impact));
+    const direction = impact >= 0 ? 'increase' : 'decrease';
+
+    return `Simulated impact on your ${unit}: ${formattedImpact} (${direction})`;
+  };
+  // --- End Simulated Farm Data ---
+
 
   return (
     <div className="p-4 space-y-4">
@@ -52,6 +145,12 @@ const Market = () => {
                   }>
                     {item.trend}
                   </span>
+                  {/* Display simulated impact if available */}
+                  {calculateSimulatedImpact(item, item.trend) && (
+                      <div className="text-xs text-gray-500 mt-1">
+                          {calculateSimulatedImpact(item, item.trend)} {/* Display calculated impact */}
+                      </div>
+                  )}
                 </td>
               </tr>
             ))}

@@ -1,6 +1,6 @@
 // FieldCheck.js
 import React, { useState } from 'react';
-import { Camera } from 'lucide-react';
+import { Camera, CheckCircle, XCircle } from 'lucide-react'; // Added icons for status
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
 import { simulateImageAnalysis } from '../utils/helpers';
@@ -12,21 +12,50 @@ import { simulateImageAnalysis } from '../utils/helpers';
 const FieldCheck = () => {
   const { selectedSector } = useSector();
   const [cropImage, setCropImage] = useState(null);
-  const [analyzing, setAnalyzing] = useState(false); // Keep 'analyzing' for variable name consistency
+  const [analyzing, setAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
+  const [analysisStep, setAnalysisStep] = useState(''); // State to track analysis steps
 
   const handleImageUpload = () => {
-    setCropImage('/api/placeholder/400/300');
+    // Simulate image upload
+    setCropImage('/api/placeholder/400/300'); // Use a placeholder image
     setAnalysisResult(null);
+    setAnalysisStep(''); // Clear steps on new upload
   };
 
-  const handleAnalyzeImage = async () => { // Keep 'Analyze' for function name consistency
+  const handleAnalyzeImage = async () => {
     setAnalyzing(true);
+    setAnalysisResult(null);
+    setAnalysisStep('Uploading Image...'); // Step 1
+
+    // Simulate upload time
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    setAnalysisStep('Processing Image Data...'); // Step 2
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    setAnalysisStep(`Running AI Assessment against AHDB ${selectedSector === 'cereals' ? 'Crop Disease Directory' : selectedSector === 'dairy' ? 'Forage for Knowledge' : selectedSector === 'beef' ? 'Better Returns Programme' : selectedSector === 'pork' ? 'Practical Pig App' : 'Reference Database'}...`); // Step 3 (Contextual)
+    // Simulate AI analysis time
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    setAnalysisStep('Identifying Potential Issues...'); // Step 4
+    // Simulate issue identification time
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    setAnalysisStep('Generating AHDB Recommendations...'); // Step 5
+    // Simulate recommendation generation time
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+
     try {
-      const result = await simulateImageAnalysis(selectedSector);
+      const result = await simulateImageAnalysis(selectedSector); // Actual helper call
       setAnalysisResult(result);
+      setAnalysisStep('Analysis Complete!'); // Final step on success
     } catch (error) {
-      console.error('Error analysing image:', error); // Translate here
+      console.error('Error analysing image:', error);
+      setAnalysisResult(null); // Clear result on error
+      setAnalysisStep('Analysis Failed.'); // Final step on failure
     } finally {
       setAnalyzing(false);
     }
@@ -65,21 +94,32 @@ const FieldCheck = () => {
         ) : (
           <div className="space-y-4">
             <img src={cropImage} alt="Field assessment" className="mx-auto rounded-lg" />
-            {!analyzing && !analysisResult && (
+            {!analyzing && !analysisResult && analysisStep !== 'Analysis Failed.' && ( // Show analyze button if not analyzing and no result/error
               <button
                 className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm"
                 onClick={handleAnalyzeImage}
               >
-                Analyse Image {/* Translate here */}
+                Analyse Image
               </button>
             )}
             {analyzing && (
               <div className="text-center">
-                <p className="text-sm text-gray-700">Analysing using AHDB reference database...</p> {/* Translate here */}
+                <p className="text-sm text-gray-700">{analysisStep}</p> {/* Display current step */}
                 <div className="mt-2 w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="animate-pulse h-full rounded-full bg-green-600"></div>
+                  <div className="animate-pulse h-full rounded-full bg-green-600"></div> {/* Simple loading animation */}
                 </div>
               </div>
+            )}
+             {/* Display status icon and message after analysis */}
+            {analysisStep === 'Analysis Complete!' && (
+                <div className="flex items-center justify-center text-green-600 text-sm font-medium">
+                    <CheckCircle size={20} className="mr-2"/> Analysis Complete!
+                </div>
+            )}
+            {analysisStep === 'Analysis Failed.' && (
+                <div className="flex items-center justify-center text-red-600 text-sm font-medium">
+                    <XCircle size={20} className="mr-2"/> Analysis Failed. Please try again.
+                </div>
             )}
           </div>
         )}

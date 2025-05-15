@@ -1,4 +1,3 @@
-// helpers.js
 import { SECTOR_COLORS } from './constants';
 
 /**
@@ -84,6 +83,7 @@ export const getMarketInsights = (sector) => {
  */
 export const simulateImageAnalysis = (sector) => {
   return new Promise((resolve) => {
+    // Reduced timeout here as the steps in FieldCheck.js now add delay
     setTimeout(() => {
       const results = {
         cereals: {
@@ -109,8 +109,8 @@ export const simulateImageAnalysis = (sector) => {
           possibleIssues: ['Minor clover content reduction'],
           recommendations: [
             'Good grazing conditions present',
-            'Consider rotational grazing to maximise utilisation', // Translate maximise, utilisation
-            'Check AHDB Better Returns Programme for grazing management' // Programme is already UK spelling
+            'Consider rotational grazing to maximise utilisation',
+            'Check AHDB Better Returns Programme for grazing management'
           ]
         },
         pork: {
@@ -125,7 +125,7 @@ export const simulateImageAnalysis = (sector) => {
       };
 
       resolve(results[sector]);
-    }, 2000);
+    }, 500); // Reduced simulated delay
   });
 };
 
@@ -141,7 +141,7 @@ export const getAIResponse = (sector, question) => {
       let response;
       question = question.toLowerCase();
 
-      if (question.includes('fertiliser') || question.includes('fertilizer')) { // Keep both for input, translate output
+      if (question.includes('fertiliser') || question.includes('fertilizer')) {
         if (sector === 'cereals') {
           response = 'For your winter wheat at this growth stage, I recommend following AHDB RB209 guidance with 180-220 kg N/ha split across 3 applications. Consider sulphur application (50-75 kg SO₃/ha) if soil indices suggest deficiency.';
         } else if (sector === 'dairy') {
@@ -175,7 +175,7 @@ export const getAIResponse = (sector, question) => {
  * @param {string} text - Trend or status text
  * @returns {string} Tailwind CSS classes
  */
-export const getStatusColorClasses = (text) => { // Keep Color in function name for consistency
+export const getStatusColorClasses = (text) => {
   if (text.includes('↑') || text.includes('rising') || text.includes('strong') || text.includes('Positive')) {
     return 'bg-green-50 text-green-600';
   } else if (text.includes('↓') || text.includes('pressure') || text.includes('down')) {
@@ -202,7 +202,7 @@ export const getPublicationName = (sector, index) => {
              index === 2 ? 'Mastitis Control Plan' :
              `Dairy Publication ${index}`;
     case 'beef':
-      return index === 1 ? 'Better Returns Programme' : // Programme is already UK spelling
+      return index === 1 ? 'Better Returns Programme' :
              index === 2 ? 'Beef & Lamb Selection' :
              `Beef & Lamb Publication ${index}`;
     case 'pork':

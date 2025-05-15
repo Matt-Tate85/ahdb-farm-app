@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
-import { BookOpen, Search, ChevronRight, FileText, BookMarked, Download } from 'lucide-react';
+import { BookOpen, Search, ChevronRight, FileText, BookMarked, Download, Loader } from 'lucide-react'; // Added Loader icon
 import { getPublicationName } from '../utils/helpers';
 
 /**
@@ -13,6 +13,8 @@ const KnowledgeLibrary = () => {
   const { selectedSector } = useSector();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
+  const [isSearching, setIsSearching] = useState(false); // State for search indicator
+  const [displayedPublications, setDisplayedPublications] = useState([]); // State for search results
 
   // Sample featured publications
   const featuredPublications = [
@@ -34,8 +36,9 @@ const KnowledgeLibrary = () => {
     }
   ];
 
-  // Sample recent publications
-  const recentPublications = [
+  // Sample recent publications (used as the base for search)
+  const allPublications = [ // Renamed for clarity as it's the source for search
+    ...featuredPublications, // Include featured in all for search demo
     {
       id: 3,
       title: selectedSector === 'cereals' ? 'Nitrogen Use Efficiency' :
@@ -51,7 +54,7 @@ const KnowledgeLibrary = () => {
       title: selectedSector === 'cereals' ? 'Integrated Pest Management' :
              selectedSector === 'dairy' ? 'Forage Analysis Guide' :
              selectedSector === 'beef' ? 'Cattle Housing Systems' :
-             'Optimising Feed Efficiency', // Translate here
+             'Optimising Feed Efficiency',
       type: 'Technical Guide',
       date: 'April 2025',
       description: 'Detailed guidance on implementing sustainable and effective management practices.'
@@ -68,6 +71,23 @@ const KnowledgeLibrary = () => {
     }
   ];
 
+  // Simulate search functionality
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setIsSearching(true); // Start searching indicator
+
+    // Simulate search delay
+    setTimeout(() => {
+      const filtered = allPublications.filter(pub =>
+        pub.title.toLowerCase().includes(query.toLowerCase()) ||
+        pub.description.toLowerCase().includes(query.toLowerCase()) ||
+        pub.type.toLowerCase().includes(query.toLowerCase())
+      );
+      setDisplayedPublications(query ? filtered : []); // Show results only if query exists
+      setIsSearching(false); // Stop searching indicator
+    }, 1000); // Simulate 1 second search time
+  };
+
   // Filter tabs
   const filterTabs = [
     { id: 'all', label: 'All Publications' },
@@ -76,6 +96,12 @@ const KnowledgeLibrary = () => {
     { id: 'tools', label: 'Tools' },
     { id: 'case-studies', label: 'Case Studies' }
   ];
+
+  // Filter publications based on active filter (applied to allPublications when no search, or displayedPublications after search)
+  const filteredPublications = (searchQuery ? displayedPublications : allPublications).filter(pub =>
+    activeFilter === 'all' || pub.type.toLowerCase().replace(' ', '-') === activeFilter
+  );
+
 
   return (
     <div className="p-4 space-y-4">
@@ -92,9 +118,14 @@ const KnowledgeLibrary = () => {
             className="w-full border rounded-lg pl-10 pr-4 py-2 border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Search the AHDB Knowledge Library..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)} // Use handleSearch
             aria-label="Search publications"
           />
+           {isSearching && ( // Show loading indicator while searching
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <Loader size={18} className="animate-spin text-gray-400" />
+              </div>
+          )}
         </div>
 
         <div className="flex overflow-x-auto mt-3 pb-1">
@@ -114,97 +145,134 @@ const KnowledgeLibrary = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-4">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-medium flex items-center">
-            <BookMarked size={18} className="mr-2 text-blue-500" />
-            Featured Publications
-          </h3>
-        </div>
-
-        <div className="space-y-4">
-          {featuredPublications.map(pub => (
-            <div key={pub.id} className="border rounded-lg p-4">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h4 className="text-base font-medium">{pub.title}</h4>
-                  <div className="flex items-center mt-1">
-                    <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-full mr-2">{pub.type}</span>
-                    <span className="text-xs text-gray-500">{pub.date}</span>
+      {/* Display search results or featured/recent publications */}
+      {searchQuery ? (
+           <div className="bg-white rounded-lg shadow p-4">
+               <h3 className="font-medium mb-3">Search Results ({filteredPublications.length})</h3>
+               {isSearching ? (
+                   <div className="text-center text-gray-500">Scanning resources...</div> // Simplified scanning indicator
+               ) : filteredPublications.length > 0 ? (
+                   <div className="space-y-3">
+                       {filteredPublications.map(pub => (
+                           <div key={pub.id} className="border rounded-lg p-3">
+                               <div className="flex justify-between items-start">
+                                   <div>
+                                       <h4 className="text-sm font-medium">{pub.title}</h4>
+                                       <div className="flex items-center mt-1">
+                                           <span className="bg-green-50 text-green-600 text-xs px-2 py-0.5 rounded-full mr-2">{pub.type}</span>
+                                           <span className="text-xs text-gray-500">{pub.date}</span>
+                                       </div>
+                                   </div>
+                                   <button className="text-blue-500">
+                                       <ChevronRight size={18} />
+                                   </button>
+                               </div>
+                               <p className="text-xs text-gray-700 mt-2">{pub.description}</p>
+                           </div>
+                       ))}
+                   </div>
+               ) : (
+                   <div className="p-4 text-center text-gray-500">
+                       <Search size={32} className="mx-auto mb-2 text-gray-400" />
+                       <p>No publications found matching your search.</p>
+                   </div>
+               )}
+           </div>
+      ) : (
+          <>
+              <div className="bg-white rounded-lg shadow p-4">
+                  <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-medium flex items-center">
+                          <BookMarked size={18} className="mr-2 text-blue-500" />
+                          Featured Publications
+                      </h3>
                   </div>
-                </div>
-                <button className="bg-blue-500 text-white text-xs px-3 py-1 rounded-lg flex items-center">
-                  <Download size={14} className="mr-1" />
-                  Download
-                </button>
-              </div>
-              <p className="text-sm text-gray-700 mb-2">{pub.description}</p>
-              <div className="text-xs text-gray-500">{pub.downloadCount} downloads</div>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      <div className="bg-white rounded-lg shadow p-4">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-medium flex items-center">
-            <FileText size={18} className="mr-2 text-green-600" />
-            Recent Publications
-          </h3>
-          <button className="text-xs text-blue-500">
-            View All
-          </button>
-        </div>
-
-        <div className="space-y-3">
-          {recentPublications.map(pub => (
-            <div key={pub.id} className="border rounded-lg p-3">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h4 className="text-sm font-medium">{pub.title}</h4>
-                  <div className="flex items-center mt-1">
-                    <span className="bg-green-50 text-green-600 text-xs px-2 py-0.5 rounded-full mr-2">{pub.type}</span>
-                    <span className="text-xs text-gray-500">{pub.date}</span>
+                  <div className="space-y-4">
+                      {featuredPublications.map(pub => (
+                          <div key={pub.id} className="border rounded-lg p-4">
+                              <div className="flex justify-between items-start mb-2">
+                                  <div>
+                                      <h4 className="text-base font-medium">{pub.title}</h4>
+                                      <div className="flex items-center mt-1">
+                                          <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-full mr-2">{pub.type}</span>
+                                          <span className="text-xs text-gray-500">{pub.date}</span>
+                                      </div>
+                                  </div>
+                                  <button className="bg-blue-500 text-white text-xs px-3 py-1 rounded-lg flex items-center">
+                                      <Download size={14} className="mr-1" />
+                                      Download
+                                  </button>
+                              </div>
+                              <p className="text-sm text-gray-700 mb-2">{pub.description}</p>
+                              <div className="text-xs text-gray-500">{pub.downloadCount} downloads</div>
+                          </div>
+                      ))}
                   </div>
-                </div>
-                <button className="text-blue-500">
-                  <ChevronRight size={18} />
-                </button>
               </div>
-              <p className="text-xs text-gray-700 mt-2">{pub.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      <div className="bg-white rounded-lg shadow p-4">
-        <h3 className="font-medium mb-3 flex items-center">
-          <BookOpen size={18} className="mr-2 text-amber-600" />
-          Specialist Collections
-        </h3>
+              <div className="bg-white rounded-lg shadow p-4">
+                  <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-medium flex items-center">
+                          <FileText size={18} className="mr-2 text-green-600" />
+                          Recent Publications
+                      </h3>
+                      <button className="text-xs text-blue-500">
+                          View All
+                      </button>
+                  </div>
 
-        <div className="space-y-2">
-          <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
-            <span className="text-sm">{selectedSector === 'cereals' ? 'Crop Protection' :
-                                     selectedSector === 'dairy' ? 'Dairy Nutrition' :
-                                     selectedSector === 'beef' ? 'Cattle Health' :
-                                     'Pig Production'}</span>
-            <ChevronRight size={16} />
-          </div>
-          <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
-            <span className="text-sm">Soil Management</span>
-            <ChevronRight size={16} />
-          </div>
-          <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
-            <span className="text-sm">Business Management</span>
-            <ChevronRight size={16} />
-          </div>
-          <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
-            <span className="text-sm">Climate & Environment</span>
-            <ChevronRight size={16} />
-          </div>
-        </div>
-      </div>
+                  <div className="space-y-3">
+                      {allPublications.slice(0,3).map(pub => ( // Display first 3 from allPublications as recent
+                          <div key={pub.id} className="border rounded-lg p-3">
+                              <div className="flex justify-between items-start">
+                                  <div>
+                                      <h4 className="text-sm font-medium">{pub.title}</h4>
+                                      <div className="flex items-center mt-1">
+                                          <span className="bg-green-50 text-green-600 text-xs px-2 py-0.5 rounded-full mr-2">{pub.type}</span>
+                                          <span className="text-xs text-gray-500">{pub.date}</span>
+                                      </div>
+                                  </div>
+                                  <button className="text-blue-500">
+                                      <ChevronRight size={18} />
+                                  </button>
+                              </div>
+                              <p className="text-xs text-gray-700 mt-2">{pub.description}</p>
+                          </div>
+                      ))}
+                  </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-4">
+                  <h3 className="font-medium mb-3 flex items-center">
+                      <BookOpen size={18} className="mr-2 text-amber-600" />
+                      Specialist Collections
+                  </h3>
+
+                  <div className="space-y-2">
+                      <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
+                          <span className="text-sm">{selectedSector === 'cereals' ? 'Crop Protection' :
+                                                   selectedSector === 'dairy' ? 'Dairy Nutrition' :
+                                                   selectedSector === 'beef' ? 'Cattle Health' :
+                                                   'Pig Production'}</span>
+                          <ChevronRight size={16} />
+                      </div>
+                      <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
+                          <span className="text-sm">Soil Management</span>
+                          <ChevronRight size={16} />
+                      </div>
+                      <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
+                          <span className="text-sm">Business Management</span>
+                          <ChevronRight size={16} />
+                      </div>
+                      <div className="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
+                          <span className="text-sm">Climate & Environment</span>
+                          <ChevronRight size={16} />
+                      </div>
+                  </div>
+              </div>
+          </>
+      )}
     </div>
   );
 };

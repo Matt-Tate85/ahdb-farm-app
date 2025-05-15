@@ -21,7 +21,12 @@ const Farmbench = () => {
         { name: 'Gross Margin', value: '£1,105/ha', avg: '£980/ha', status: 'above' }
       ],
       position: 'Top 25%',
-      summary: 'Your cereal enterprise is performing well, with yields above and costs below the national average.'
+      summary: 'Your cereal enterprise is performing well, with yields above and costs below the national average.',
+      recommendations: [ // Added tailored recommendations
+        'Explore advanced variety selection tools in the Knowledge Library to potentially further increase yields.',
+        'Review your fertiliser application timing and rates using the RB209 calculator to optimise nutrient use efficiency.',
+        'Benchmark your machinery costs in more detail using the Machinery Cost Calculator to identify potential savings.'
+      ]
     },
     dairy: {
       metrics: [
@@ -31,7 +36,12 @@ const Farmbench = () => {
         { name: 'Margin', value: '8.0 ppl', avg: '6.3 ppl', status: 'above' }
       ],
       position: 'Top 25%',
-      summary: 'Your dairy enterprise is showing strong performance with good cost control and above average yields.'
+      summary: 'Your dairy enterprise is showing strong performance with good cost control and above average yields.',
+      recommendations: [ // Added tailored recommendations
+        'Utilise the Feed Planning Tool to fine-tune rations and potentially improve feed efficiency further.',
+        'Benchmark your heifer rearing costs using the Heifer Rearing Calculator.',
+        'Review the latest AHDB research on mastitis control programmes in the Knowledge Library.'
+      ]
     },
     beef: {
       metrics: [
@@ -41,7 +51,12 @@ const Farmbench = () => {
         { name: 'Margin', value: '£285/head', avg: '£215/head', status: 'above' }
       ],
       position: 'Top 25%',
-      summary: 'Your beef enterprise is performing well with good growth rates and cost efficiency compared to similar farms.'
+      summary: 'Your beef enterprise is performing well with good growth rates and cost efficiency compared to similar farms.',
+      recommendations: [ // Added tailored recommendations
+        'Explore the Grazing Planning Tool to optimise grass utilisation and grazing rotation.',
+        'Benchmark your suckler herd performance against other farms using Farmbench.',
+        'Review the AHDB Beef & Lamb selection resources to ensure optimal animal performance.'
+      ]
     },
     pork: {
       metrics: [
@@ -51,7 +66,12 @@ const Farmbench = () => {
         { name: 'Margin', value: '18p/kg DW', avg: '12p/kg DW', status: 'above' }
       ],
       position: 'Top 25%',
-      summary: 'Your pig enterprise shows strong technical performance with good breeding productivity and feed efficiency.'
+      summary: 'Your pig enterprise shows strong technical performance with good breeding productivity and feed efficiency.',
+      recommendations: [ // Added tailored recommendations
+        'Utilise the Pig Production Calculator to track and analyse key performance indicators in more detail.',
+        'Review AHDB guidance on optimising indoor environments for pig welfare.',
+        'Explore the latest research on reducing antibiotic usage in the Research Projects section.'
+      ]
     }
   };
 
@@ -95,7 +115,19 @@ const Farmbench = () => {
           ))}
         </div>
 
-        <button className="w-full py-2 rounded-lg bg-blue-500 text-white">
+         {/* Tailored Recommendations Section */}
+        {currentData.recommendations && currentData.recommendations.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-gray-100">
+                <h4 className="font-medium mb-2">Tailored AHDB Recommendations:</h4>
+                <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
+                    {currentData.recommendations.map((rec, i) => (
+                        <li key={i}>{rec}</li>
+                    ))}
+                </ul>
+            </div>
+        )}
+
+        <button className="w-full py-2 rounded-lg bg-blue-500 text-white mt-4"> {/* Adjusted margin-top */}
           View Full Benchmarking Report
         </button>
       </div>

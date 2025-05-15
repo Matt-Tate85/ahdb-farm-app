@@ -31,13 +31,13 @@ const SectorSelector = () => {
     <div
       className="rounded-lg p-3 mb-4 border-l-4" // Removed bg-green-50 and border-l-green-600
       style={{
-        backgroundColor: COLORS.credible, // Set background to credible
-        borderLeftColor: COLORS.ahdbBlue, // Set left border color to ahdbBlue
+        backgroundColor: COLORS.,ahdbBlue // Set background to credible
+        borderLeftColor: COLORS.credible, // Set left border color to ahdbBlue
       }}
     >
       <div
         className="text-sm font-semibold mb-2" // Removed text-green-600
-        style={{ color: COLORS.ahdbBlue }} // Set text color to ahdbBlue
+        style={{ color: COLORS.white }} // Set text color to ahdbBlue
       >
         Current AHDB Sector
       </div>

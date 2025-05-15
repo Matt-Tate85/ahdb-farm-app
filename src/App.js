@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-// Common components
+// Common component
 import Header from './components/common/Header';
 import Navigation from './components/common/Navigation';
 import SideMenu from './components/common/SideMenu';

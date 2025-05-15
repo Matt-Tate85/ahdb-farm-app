@@ -13,7 +13,7 @@ const PriorityActions = () => {
     <div className="bg-white rounded-lg shadow p-4">
       <h3 className="font-medium mb-2 flex items-center">
         <AlertTriangle size={18} className="mr-2 text-orange-500" />
-        AHDB Priority Actions
+        Priority Actions
       </h3>
       <ul className="space-y-2">
         {selectedSector === 'cereals' && (

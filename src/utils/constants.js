@@ -49,7 +49,7 @@ export const MAIN_TABS = [
   { id: 'market', label: 'Markets', icon: 'BarChart2' },
   { id: 'my-farm', label: 'My Farm', icon: 'Map' },
   { id: 'tools', label: 'Tools', icon: 'Briefcase' },
-  { id: 'events', label: 'Events', icon: 'Calendar' },
+  { id: 'events-near-me', label: 'Events', icon: 'Calendar' },
   { id: 'library', label: 'Library', icon: 'FileText' }
 ];
 
@@ -61,7 +61,6 @@ export const SIDE_MENU_ITEMS = [
   { id: 'market', label: 'Markets', icon: 'BarChart2' },
   { id: 'my-farm', label: 'My Farm', icon: 'Map' },
   { id: 'tools', label: 'Tools', icon: 'Briefcase' },
-  { id: 'events', label: 'Events', icon: 'Calendar' },
   { id: 'library', label: 'Library', icon: 'FileText' },
   { id: 'farm-record', label: 'My Farm Record', icon: 'ClipboardList' },
   { id: 'farmbench', label: 'AHDB Farmbench', icon: 'TrendingUp' },

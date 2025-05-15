@@ -60,7 +60,7 @@ export const SIDE_MENU_ITEMS = [
   { id: 'farm-record', label: 'My Farm Record', icon: 'ClipboardList' },
   { id: 'farmbench', label: 'AHDB Farmbench', icon: 'TrendingUp' },
   { id: 'knowledge-library', label: 'AHDB Knowledge Library', icon: 'BookOpen' },
-  { id: 'research-projects', label: 'Research Projects', icon: 'folder-search' },
+  { id: 'research-projects', label: 'Research Projects', icon: 'Folder-Search' },
   { id: 'monitor-farm', label: 'Local Monitor Farm', icon: 'MapPin' },
   { id: 'events-near-me', label: 'Events Near Me', icon: 'Calendar' },
   { id: 'settings', label: 'Settings', icon: 'Settings' },

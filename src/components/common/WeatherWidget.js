@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as LucideIcons from 'lucide-react';
 
-console.log("Full process.env:", process.env); // <-- Add this line
-console.log("API Key from process.env:", process.env.REACT_APP_OPENWEATHERMAP_API_KEY); // <-- Keep this line
-
-const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+const API_KEY = 5fbc3b4e49efe87c42b2e576ae8b09b0;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 // Helper function to group forecast data by day (same as before)

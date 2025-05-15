@@ -49,10 +49,18 @@ export const MAIN_TABS = [
 
 // Side menu navigation items
 export const SIDE_MENU_ITEMS = [
+  { id: 'home', label: 'Dashboard', icon: 'Home' },
+  { id: 'field-check', label: 'Field Check', icon: 'Camera' },
+  { id: 'advice', label: 'Advice', icon: 'MessageCircle' },
+  { id: 'market', label: 'Markets', icon: 'BarChart2' },
+  { id: 'my-farm', label: 'My Farm', icon: 'Map' },
+  { id: 'tools', label: 'Tools', icon: 'Briefcase' },
+  { id: 'events', label: 'Events', icon: 'Calendar' },
+  { id: 'library', label: 'Library', icon: 'FileText' },
   { id: 'farm-record', label: 'My Farm Record', icon: 'ClipboardList' },
   { id: 'farmbench', label: 'AHDB Farmbench', icon: 'TrendingUp' },
   { id: 'knowledge-library', label: 'AHDB Knowledge Library', icon: 'BookOpen' },
-  { id: 'research-projects', label: 'Research Projects', icon: 'Flask' },
+  { id: 'research-projects', label: 'Research Projects', icon: 'folder-search' },
   { id: 'monitor-farm', label: 'Local Monitor Farm', icon: 'MapPin' },
   { id: 'events-near-me', label: 'Events Near Me', icon: 'Calendar' },
   { id: 'tools-calculators', label: 'Tools & Calculators', icon: 'Calculator' },

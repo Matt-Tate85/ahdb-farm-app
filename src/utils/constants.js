@@ -21,7 +21,7 @@ export const SECTOR_COLORS = { // Translate colours
   cereals: {
     main: COLORS.olive,
     light: COLORS.balance,
-    text: "#b65610"
+    text: COLORS.ahdbText
   },
   dairy: {
     main: COLORS.gold,

@@ -59,7 +59,7 @@ const SectorSelector = () => {
         <button
           className={`rounded-lg px-3 py-2 text-xs font-medium flex-grow border max-w-[calc(50%-0.25rem)] ${selectedSector === 'beef' ? 'font-semibold' : 'font-medium'}`}
            style={getButtonStyles('beef')} // Apply dynamic styles
-          onClick={() => setSelectedSector('beef and lamb')}
+          onClick={() => setSelectedSector('beef')}
         >
           Beef & Lamb
         </button>

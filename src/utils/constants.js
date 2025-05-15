@@ -13,7 +13,8 @@ export const COLORS = { // Translate colours
   gold: "#F5B81C",
   beefgreen: "#69AC27",
   olive: "#789A54",
-  porkblue: "#1E4E9A"
+  porkblue: "#1E4E9A",
+  white: "#FFF"
 };
 
 // Sector-specific colours

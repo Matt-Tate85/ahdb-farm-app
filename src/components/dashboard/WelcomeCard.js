@@ -24,7 +24,7 @@ const WelcomeCard = () => {
   const cardBackgroundColor = sectorColors?.main || defaultColors.main;
   const cardBorderColor = sectorColors?.main || defaultColors.main;
   const cardTextColor = '#fff'; // Changed to always be white
-  const headingTextColor = sectorColors?.text || defaultColors.text; // Use main color for heading
+  const headingTextColor = '#fff'; // Changed to always be white
 
 
   return (

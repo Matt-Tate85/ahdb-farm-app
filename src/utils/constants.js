@@ -1,5 +1,6 @@
-// AHDB brand colors
-export const COLORS = {
+// constants.js
+// AHDB brand colours
+export const COLORS = { // Translate colours
   ahdbBlue: "#0090d4",
   ahdbGreen: "#6da32f",
   ahdbText: "#575756",
@@ -10,8 +11,8 @@ export const COLORS = {
   confident: "#ed7013"
 };
 
-// Sector-specific colors
-export const SECTOR_COLORS = {
+// Sector-specific colours
+export const SECTOR_COLORS = { // Translate colours
   cereals: {
     main: COLORS.confident,
     light: "#fdf0e6",

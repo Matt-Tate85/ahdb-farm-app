@@ -1,3 +1,4 @@
+// ToolsCalculators.js
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -31,18 +32,18 @@ const ToolsCalculators = () => {
       relevantSectors: ['cereals', 'dairy', 'beef', 'pork']
     },
     {
-      id: selectedSector === 'cereals' ? 'rb209' : 
+      id: selectedSector === 'cereals' ? 'rb209' :
           selectedSector === 'dairy' ? 'feed-planning' :
           selectedSector === 'beef' ? 'graze-planning' :
           'production-calculator',
-      name: selectedSector === 'cereals' ? 'RB209 Nutrient Calculator' : 
+      name: selectedSector === 'cereals' ? 'RB209 Nutrient Calculator' :
            selectedSector === 'dairy' ? 'Feed Planning Tool' :
            selectedSector === 'beef' ? 'Grazing Planning Tool' :
            'Pig Production Calculator',
-      description: selectedSector === 'cereals' ? 'Calculate crop nutrient requirements based on soil type, previous cropping and expected yields.' : 
-                  selectedSector === 'dairy' ? 'Plan and optimize dairy cow rations to maximize milk production efficiency.' :
-                  selectedSector === 'beef' ? 'Plan rotational grazing to optimize grass utilization and livestock performance.' :
-                  'Track and analyze pig production metrics to identify improvement opportunities.',
+      description: selectedSector === 'cereals' ? 'Calculate crop nutrient requirements based on soil type, previous cropping and expected yields.' :
+                  selectedSector === 'dairy' ? 'Plan and optimise dairy cow rations to maximise milk production efficiency.' : // Translate optimise, maximise
+                  selectedSector === 'beef' ? 'Plan rotational grazing to optimise grass utilisation and livestock performance.' : // Translate optimise, utilisation
+                  'Track and analyse pig production metrics to identify improvement opportunities.', // Translate analyse
       category: selectedSector === 'cereals' ? 'nutrient' : 'production',
       relevantSectors: [selectedSector]
     }
@@ -66,31 +67,31 @@ const ToolsCalculators = () => {
       relevantSectors: ['cereals', 'dairy', 'beef', 'pork']
     },
     {
-      id: selectedSector === 'cereals' ? 'spray-planning' : 
+      id: selectedSector === 'cereals' ? 'spray-planning' :
           selectedSector === 'dairy' ? 'milk-price' :
           selectedSector === 'beef' ? 'feed-profit' :
           'finisher-tool',
-      name: selectedSector === 'cereals' ? 'Spray Planning Tool' : 
+      name: selectedSector === 'cereals' ? 'Spray Planning Tool' :
            selectedSector === 'dairy' ? 'Milk Price Calculator' :
            selectedSector === 'beef' ? 'Feed to Profit' :
            'Finisher Tool',
-      description: selectedSector === 'cereals' ? 'Plan spray applications with timing recommendations based on crop growth stage and weather.' : 
+      description: selectedSector === 'cereals' ? 'Plan spray applications with timing recommendations based on crop growth stage and weather.' :
                   selectedSector === 'dairy' ? 'Compare milk contracts and calculate the value of your milk under different pricing scenarios.' :
                   selectedSector === 'beef' ? 'Calculate the cost-benefit of different feeding regimes for finishing cattle.' :
-                  'Track and optimize finishing pig performance and costs.',
+                  'Track and optimise finishing pig performance and costs.', // Translate optimise
       category: 'production',
       relevantSectors: [selectedSector]
     },
     {
-      id: selectedSector === 'cereals' ? 'machinery-cost' : 
+      id: selectedSector === 'cereals' ? 'machinery-cost' :
           selectedSector === 'dairy' ? 'heifer-rearing' :
           selectedSector === 'beef' ? 'calf-selection' :
           'building-cost',
-      name: selectedSector === 'cereals' ? 'Machinery Cost Calculator' : 
+      name: selectedSector === 'cereals' ? 'Machinery Cost Calculator' :
            selectedSector === 'dairy' ? 'Heifer Rearing Calculator' :
            selectedSector === 'beef' ? 'Calf Selection Tool' :
            'Building Cost Calculator',
-      description: selectedSector === 'cereals' ? 'Calculate the true cost of machinery ownership and compare ownership vs. contracting options.' : 
+      description: selectedSector === 'cereals' ? 'Calculate the true cost of machinery ownership and compare ownership vs. contracting options.' :
                   selectedSector === 'dairy' ? 'Calculate the costs of rearing dairy heifers and identify efficiency savings.' :
                   selectedSector === 'beef' ? 'Select the most suitable calves for beef production based on breeding and conformation.' :
                   'Calculate and compare different pig housing options and ventilation systems.',
@@ -100,7 +101,7 @@ const ToolsCalculators = () => {
     {
       id: 'water-management',
       name: 'Water Management Tool',
-      description: 'Plan irrigation scheduling and optimize water use efficiency on your farm.',
+      description: 'Plan irrigation scheduling and optimise water use efficiency on your farm.', // Translate optimise
       category: 'environmental',
       relevantSectors: ['cereals', 'dairy', 'beef', 'pork']
     }
@@ -112,12 +113,12 @@ const ToolsCalculators = () => {
     if (activeCategory !== 'all' && tool.category !== activeCategory) {
       return false;
     }
-    
+
     // Sector filter
     if (!tool.relevantSectors.includes(selectedSector)) {
       return false;
     }
-    
+
     // Search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -126,15 +127,15 @@ const ToolsCalculators = () => {
         tool.description.toLowerCase().includes(query)
       );
     }
-    
+
     return true;
   });
 
   // Recently used tools (sample data)
   const recentlyUsedTools = [
     allTools.find(tool => tool.id === 'farmbench'),
-    allTools.find(tool => 
-      tool.id === (selectedSector === 'cereals' ? 'rb209' : 
+    allTools.find(tool =>
+      tool.id === (selectedSector === 'cereals' ? 'rb209' :
                   selectedSector === 'dairy' ? 'feed-planning' :
                   selectedSector === 'beef' ? 'graze-planning' :
                   'production-calculator'))
@@ -143,9 +144,9 @@ const ToolsCalculators = () => {
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Tools & Calculators</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="relative mb-3">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -159,14 +160,14 @@ const ToolsCalculators = () => {
             aria-label="Search tools"
           />
         </div>
-        
+
         <div className="flex overflow-x-auto pb-2 mb-3">
           {categories.map(category => (
             <button
               key={category.id}
               className={`px-3 py-1 text-sm whitespace-nowrap mr-2 rounded-full ${
-                activeCategory === category.id 
-                  ? 'bg-blue-500 text-white' 
+                activeCategory === category.id
+                  ? 'bg-blue-500 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               onClick={() => setActiveCategory(category.id)}
@@ -175,7 +176,7 @@ const ToolsCalculators = () => {
             </button>
           ))}
         </div>
-        
+
         <div className="space-y-4">
           {filteredTools.map(tool => (
             <div key={tool.id} className="border rounded-lg p-4">
@@ -190,15 +191,15 @@ const ToolsCalculators = () => {
                   {categories.find(cat => cat.id === tool.category)?.label || tool.category}
                 </span>
               </div>
-              
+
               <p className="text-sm text-gray-700 mb-3">{tool.description}</p>
-              
+
               <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg w-full">
                 Launch Tool
               </button>
             </div>
           ))}
-          
+
           {filteredTools.length === 0 && (
             <div className="p-4 text-center text-gray-500">
               <Calculator size={32} className="mx-auto mb-2 text-gray-400" />
@@ -208,7 +209,7 @@ const ToolsCalculators = () => {
           )}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -216,7 +217,7 @@ const ToolsCalculators = () => {
             Recently Used Tools
           </h3>
         </div>
-        
+
         <div className="space-y-2">
           {recentlyUsedTools.map(tool => (
             <div key={tool.id} className="p-3 border-b last:border-0 flex justify-between items-center">
@@ -231,17 +232,17 @@ const ToolsCalculators = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3 flex items-center">
           <Star size={18} className="mr-2 text-amber-500" />
           Tool Recommendations
         </h3>
-        
+
         <p className="text-sm text-gray-700 mb-3">
           Based on your farm profile and recent activity, these tools might be helpful:
         </p>
-        
+
         <div className="space-y-2">
           {featuredTools.map(tool => (
             <div key={tool.id} className="p-3 border rounded-lg flex justify-between items-center">

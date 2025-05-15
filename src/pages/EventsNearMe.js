@@ -1,3 +1,4 @@
+// EventsNearMe.js
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -35,9 +36,9 @@ const EventsNearMe = () => {
   const events = [
     {
       id: 1,
-      title: selectedSector === 'cereals' ? 'Monitor Farm Meeting' : 
+      title: selectedSector === 'cereals' ? 'Monitor Farm Meeting' :
              selectedSector === 'dairy' ? 'Strategic Dairy Farm Open Day' :
-             selectedSector === 'beef' ? 'Better Returns Programme Workshop' :
+             selectedSector === 'beef' ? 'Better Returns Programme Workshop' : // Programme is already UK spelling
              'Pig Health and Performance Seminar',
       date: '20 May 2025',
       time: '10:00 - 15:00',
@@ -49,7 +50,7 @@ const EventsNearMe = () => {
     },
     {
       id: 2,
-      title: selectedSector === 'cereals' ? 'Soil Health Workshop' : 
+      title: selectedSector === 'cereals' ? 'Soil Health Workshop' :
              selectedSector === 'dairy' ? 'Grassland Management Webinar' :
              selectedSector === 'beef' ? 'Lamb Selection Workshop' :
              'Reducing Production Costs Forum',
@@ -63,7 +64,7 @@ const EventsNearMe = () => {
     },
     {
       id: 3,
-      title: selectedSector === 'cereals' ? 'Integrated Pest Management Workshop' : 
+      title: selectedSector === 'cereals' ? 'Integrated Pest Management Workshop' :
              selectedSector === 'dairy' ? 'Dairy Tech Best Practice Meeting' :
              selectedSector === 'beef' ? 'Pasture for Life Certification' :
              'Pig Finishing Efficiency Meeting',
@@ -77,7 +78,7 @@ const EventsNearMe = () => {
     },
     {
       id: 4,
-      title: selectedSector === 'cereals' ? 'Cereals 2025' : 
+      title: selectedSector === 'cereals' ? 'Cereals 2025' :
              selectedSector === 'dairy' ? 'DairyTech 2025' :
              selectedSector === 'beef' ? 'Beef Expo 2025' :
              'Pig & Poultry Fair 2025',
@@ -104,12 +105,12 @@ const EventsNearMe = () => {
         }
       }
     }
-    
+
     // Type filter
     if (filterType !== 'all' && event.type !== filterType) {
       return false;
     }
-    
+
     // Search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -119,16 +120,16 @@ const EventsNearMe = () => {
         event.description.toLowerCase().includes(query)
       );
     }
-    
+
     return true;
   });
 
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Events Near Me</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="relative mb-3">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -141,20 +142,20 @@ const EventsNearMe = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             aria-label="Search events"
           />
-          <button 
+          <button
             className="absolute inset-y-0 right-0 px-3 flex items-center"
             onClick={() => setShowFilters(!showFilters)}
           >
             <Filter size={18} className="text-gray-400" />
           </button>
         </div>
-        
+
         {showFilters && (
           <div className="p-3 bg-gray-50 rounded-lg mb-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Event Type</label>
-                <select 
+                <select
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
@@ -166,7 +167,7 @@ const EventsNearMe = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Distance</label>
-                <select 
+                <select
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
                   value={filterDistance}
                   onChange={(e) => setFilterDistance(e.target.value)}
@@ -179,12 +180,12 @@ const EventsNearMe = () => {
             </div>
           </div>
         )}
-        
+
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-medium">Upcoming Events</h3>
           <span className="text-xs text-gray-500">{filteredEvents.length} events found</span>
         </div>
-        
+
         {filteredEvents.length === 0 ? (
           <div className="p-4 text-center text-gray-500">
             <Calendar size={32} className="mx-auto mb-2 text-gray-400" />
@@ -201,7 +202,7 @@ const EventsNearMe = () => {
                     {event.distance}
                   </span>
                 </div>
-                
+
                 <div className="flex flex-wrap text-xs text-gray-600 mb-2">
                   <div className="flex items-center mr-3">
                     <Calendar size={14} className="mr-1 text-green-600" />
@@ -212,14 +213,14 @@ const EventsNearMe = () => {
                     {event.location}
                   </div>
                 </div>
-                
+
                 <p className="text-xs text-gray-700 mb-2">{event.description}</p>
-                
+
                 <div className="flex justify-between items-center">
                   <div className="flex items-center text-xs text-gray-600">
                     <Users size={14} className="mr-1" />
-                    {typeof event.placesAvailable === 'number' 
-                      ? `${event.placesAvailable} places available` 
+                    {typeof event.placesAvailable === 'number'
+                      ? `${event.placesAvailable} places available`
                       : event.placesAvailable}
                   </div>
                   <button className="text-xs text-blue-500 flex items-center">
@@ -232,11 +233,11 @@ const EventsNearMe = () => {
           </div>
         )}
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3">Can't find an event near you?</h3>
         <p className="text-sm text-gray-700 mb-3">
-          AHDB regularly organizes events across the UK. If you can't find an event in your area,
+          AHDB regularly organises events across the UK. If you can't find an event in your area, {/* Translate organises */}
           you can register your interest for future events or check out our online webinars.
         </p>
         <div className="flex space-x-2">

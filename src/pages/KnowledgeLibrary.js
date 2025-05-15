@@ -1,3 +1,4 @@
+// KnowledgeLibrary.js
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -37,7 +38,7 @@ const KnowledgeLibrary = () => {
   const recentPublications = [
     {
       id: 3,
-      title: selectedSector === 'cereals' ? 'Nitrogen Use Efficiency' : 
+      title: selectedSector === 'cereals' ? 'Nitrogen Use Efficiency' :
              selectedSector === 'dairy' ? 'Transition Cow Management' :
              selectedSector === 'beef' ? 'Grazing Strategies' :
              'Reducing Antibiotic Usage',
@@ -47,17 +48,17 @@ const KnowledgeLibrary = () => {
     },
     {
       id: 4,
-      title: selectedSector === 'cereals' ? 'Integrated Pest Management' : 
+      title: selectedSector === 'cereals' ? 'Integrated Pest Management' :
              selectedSector === 'dairy' ? 'Forage Analysis Guide' :
              selectedSector === 'beef' ? 'Cattle Housing Systems' :
-             'Optimizing Feed Efficiency',
+             'Optimising Feed Efficiency', // Translate here
       type: 'Technical Guide',
       date: 'April 2025',
       description: 'Detailed guidance on implementing sustainable and effective management practices.'
     },
     {
       id: 5,
-      title: selectedSector === 'cereals' ? 'Machinery Cost Calculator' : 
+      title: selectedSector === 'cereals' ? 'Machinery Cost Calculator' :
              selectedSector === 'dairy' ? 'Milk Contract Comparison' :
              selectedSector === 'beef' ? 'Financial Planning Tool' :
              'Production Cost Analysis',
@@ -79,9 +80,9 @@ const KnowledgeLibrary = () => {
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Knowledge Library</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -95,14 +96,14 @@ const KnowledgeLibrary = () => {
             aria-label="Search publications"
           />
         </div>
-        
+
         <div className="flex overflow-x-auto mt-3 pb-1">
           {filterTabs.map(tab => (
             <button
               key={tab.id}
               className={`px-3 py-1 text-sm whitespace-nowrap mr-2 rounded-full ${
-                activeFilter === tab.id 
-                  ? 'bg-blue-500 text-white' 
+                activeFilter === tab.id
+                  ? 'bg-blue-500 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               onClick={() => setActiveFilter(tab.id)}
@@ -112,7 +113,7 @@ const KnowledgeLibrary = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -120,7 +121,7 @@ const KnowledgeLibrary = () => {
             Featured Publications
           </h3>
         </div>
-        
+
         <div className="space-y-4">
           {featuredPublications.map(pub => (
             <div key={pub.id} className="border rounded-lg p-4">
@@ -143,7 +144,7 @@ const KnowledgeLibrary = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -154,7 +155,7 @@ const KnowledgeLibrary = () => {
             View All
           </button>
         </div>
-        
+
         <div className="space-y-3">
           {recentPublications.map(pub => (
             <div key={pub.id} className="border rounded-lg p-3">
@@ -175,16 +176,16 @@ const KnowledgeLibrary = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3 flex items-center">
           <BookOpen size={18} className="mr-2 text-amber-600" />
           Specialist Collections
         </h3>
-        
+
         <div className="space-y-2">
           <div className="flex justify-between items-center p-2 border-b hover:bg-gray-50 rounded">
-            <span className="text-sm">{selectedSector === 'cereals' ? 'Crop Protection' : 
+            <span className="text-sm">{selectedSector === 'cereals' ? 'Crop Protection' :
                                      selectedSector === 'dairy' ? 'Dairy Nutrition' :
                                      selectedSector === 'beef' ? 'Cattle Health' :
                                      'Pig Production'}</span>

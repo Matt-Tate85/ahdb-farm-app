@@ -30,7 +30,7 @@ const WeatherWidget = ({ location = 'Yorkshire' }) => {
         })}
       </div>
       <div className="mt-2 text-xs text-center text-gray-700">
-        Data source: AHDB Weather Hub & Met Office
+        Data source: Met Office
       </div>
     </div>
   );

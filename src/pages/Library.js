@@ -1,3 +1,4 @@
+// Library.js
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -14,9 +15,9 @@ const Library = () => {
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Knowledge Library</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="relative">
           <input
@@ -31,10 +32,10 @@ const Library = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3">Recent Publications</h3>
-        
+
         <div className="space-y-3">
           {[1, 2, 3].map(i => (
             <div key={i} className="p-3 border rounded-lg">
@@ -54,10 +55,10 @@ const Library = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3">Publication Categories</h3>
-        
+
         <div className="space-y-2">
           <div className="flex justify-between items-center p-2 border-b">
             <span>Research Papers</span>

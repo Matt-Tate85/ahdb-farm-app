@@ -1,3 +1,4 @@
+// Farmbench.js
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -59,9 +60,9 @@ const Farmbench = () => {
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Farmbench</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-medium flex items-center">
@@ -72,11 +73,11 @@ const Farmbench = () => {
             {currentData.position}
           </div>
         </div>
-        
+
         <p className="text-sm text-gray-700 mb-4">
           {currentData.summary}
         </p>
-        
+
         <div className="grid grid-cols-2 gap-3 mb-4">
           {currentData.metrics.map((metric, i) => (
             <div key={i} className="p-3 border rounded-lg">
@@ -93,12 +94,12 @@ const Farmbench = () => {
             </div>
           ))}
         </div>
-        
+
         <button className="w-full py-2 rounded-lg bg-blue-500 text-white">
           View Full Benchmarking Report
         </button>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -106,29 +107,29 @@ const Farmbench = () => {
             3-Year Performance Trend
           </h3>
         </div>
-        
+
         <div className="h-64 bg-gray-50 rounded-lg flex justify-center items-center p-4 mb-4">
           <div className="text-center text-gray-500">
             <BarChart2 size={40} className="mx-auto mb-2 text-gray-400" />
             <span>Performance trends chart would display here</span>
           </div>
         </div>
-        
+
         <div className="text-sm text-gray-700">
           <p>Your {selectedSector} enterprise has shown consistent improvement over the last 3 years, with particularly strong gains in cost efficiency. The most recent reporting period shows you performing in the top quartile compared to similar AHDB Farmbench users.</p>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3">Data Upload</h3>
         <p className="text-sm mb-3">
           Keep your benchmarking data up to date by uploading your latest figures.
         </p>
-        
+
         <button className="w-full py-2 rounded-lg bg-green-600 text-white mb-2">
           Upload Farm Data
         </button>
-        
+
         <p className="text-xs text-gray-500 text-center">
           Last updated: 5 May 2025
         </p>

@@ -1,3 +1,4 @@
+// MonitorFarm.js
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -18,7 +19,7 @@ const MonitorFarm = () => {
       farmer: 'James Wilson',
       area: '320 hectares',
       enterprises: 'Winter wheat, winter barley, oilseed rape, spring beans',
-      description: 'This Monitor Farm focuses on improving soil health, integrated pest management and optimizing input use in arable rotations.'
+      description: 'This Monitor Farm focuses on improving soil health, integrated pest management and optimising input use in arable rotations.' // Translate optimising
     },
     dairy: {
       name: 'Mountfair Strategic Dairy Farm',
@@ -26,7 +27,7 @@ const MonitorFarm = () => {
       farmer: 'Sarah Johnson',
       area: '180 hectares',
       enterprises: 'Grass-based dairy, 250 Holstein Friesian cows',
-      description: 'This Strategic Dairy Farm showcases efficient grass utilization, optimized nutrition management and sustainable dairy production systems.'
+      description: 'This Strategic Dairy Farm showcases efficient grass utilisation, optimised nutrition management and sustainable dairy production systems.' // Translate utilisation, optimised
     },
     beef: {
       name: 'Hill Top Better Returns Farm',
@@ -34,7 +35,7 @@ const MonitorFarm = () => {
       farmer: 'Robert Thompson',
       area: '220 hectares',
       enterprises: 'Suckler beef herd, breeding sheep, forage crops',
-      description: 'This farm demonstrates grassland management, efficient breeding programs and sustainable beef production methods.'
+      description: 'This farm demonstrates grassland management, efficient breeding programmes and sustainable beef production methods.' // Translate programmes
     },
     pork: {
       name: 'Riverside Pig Farm',
@@ -49,7 +50,7 @@ const MonitorFarm = () => {
   // Upcoming events at the monitor farm
   const upcomingEvents = [
     {
-      title: selectedSector === 'cereals' ? 'Summer Crop Walk' : 
+      title: selectedSector === 'cereals' ? 'Summer Crop Walk' :
              selectedSector === 'dairy' ? 'Grassland Management Meeting' :
              selectedSector === 'beef' ? 'Cattle Health Workshop' :
              'Pig Production Efficiency Day',
@@ -59,7 +60,7 @@ const MonitorFarm = () => {
       description: 'Join us for a practical demonstration of seasonal management practices and discussion of current challenges.'
     },
     {
-      title: selectedSector === 'cereals' ? 'Soil Health Workshop' : 
+      title: selectedSector === 'cereals' ? 'Soil Health Workshop' :
              selectedSector === 'dairy' ? 'Nutrition Management Meeting' :
              selectedSector === 'beef' ? 'Breeding Selection Event' :
              'Health Management Workshop',
@@ -73,15 +74,15 @@ const MonitorFarm = () => {
   // Recent findings from the monitor farm
   const recentFindings = [
     {
-      title: selectedSector === 'cereals' ? 'Reduced Cultivation Trial Results' : 
-             selectedSector === 'dairy' ? 'Mastitis Control Program Findings' :
+      title: selectedSector === 'cereals' ? 'Reduced Cultivation Trial Results' :
+             selectedSector === 'dairy' ? 'Mastitis Control Programme Findings' : // Translate Programme
              selectedSector === 'beef' ? 'Grazing System Comparisons' :
              'Feed Efficiency Improvement Data',
       date: 'May 2025',
       summary: 'Recent trial results show promising improvements in efficiency and sustainability metrics.'
     },
     {
-      title: selectedSector === 'cereals' ? 'Variable Rate Application Analysis' : 
+      title: selectedSector === 'cereals' ? 'Variable Rate Application Analysis' :
              selectedSector === 'dairy' ? 'Milk Production Efficiency Review' :
              selectedSector === 'beef' ? 'Growth Rate Comparison Study' :
              'Mortality Reduction Initiative Outcomes',
@@ -93,24 +94,24 @@ const MonitorFarm = () => {
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Local Monitor Farm</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium">{monitorFarm[selectedSector].name}</h3>
           <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-full">
-            {selectedSector === 'cereals' ? 'Monitor Farm' : 
+            {selectedSector === 'cereals' ? 'Monitor Farm' :
              selectedSector === 'dairy' ? 'Strategic Dairy Farm' :
              selectedSector === 'beef' ? 'Better Returns Farm' :
              'Pig Demo Farm'}
           </span>
         </div>
-        
+
         <div className="h-48 bg-blue-200 rounded-lg flex justify-center items-center mb-4">
           <span className="text-white">Farm map and images would display here</span>
         </div>
-        
+
         <div className="mb-4">
           <div className="flex items-center text-sm text-gray-700 mb-1">
             <MapPin size={16} className="mr-1 text-blue-500" />
@@ -126,16 +127,16 @@ const MonitorFarm = () => {
             <span className="font-medium">Main Enterprises:</span> {monitorFarm[selectedSector].enterprises}
           </div>
         </div>
-        
+
         <p className="text-sm text-gray-700 mb-4">
           {monitorFarm[selectedSector].description}
         </p>
-        
+
         <button className="w-full py-2 rounded-lg bg-blue-500 text-white">
           View Full Farm Profile
         </button>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -147,7 +148,7 @@ const MonitorFarm = () => {
             View All
           </button>
         </div>
-        
+
         <div className="space-y-3">
           {upcomingEvents.map((event, i) => (
             <div key={i} className="border rounded-lg p-3">
@@ -173,13 +174,13 @@ const MonitorFarm = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3 flex items-center">
           <Users size={18} className="mr-2 text-amber-600" />
           Recent Findings
         </h3>
-        
+
         <div className="space-y-3">
           {recentFindings.map((finding, i) => (
             <div key={i} className="p-3 border-b last:border-0">

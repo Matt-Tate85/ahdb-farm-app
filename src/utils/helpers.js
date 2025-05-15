@@ -1,3 +1,4 @@
+// helpers.js
 import { SECTOR_COLORS } from './constants';
 
 /**
@@ -108,8 +109,8 @@ export const simulateImageAnalysis = (sector) => {
           possibleIssues: ['Minor clover content reduction'],
           recommendations: [
             'Good grazing conditions present',
-            'Consider rotational grazing to maximize utilization',
-            'Check AHDB Better Returns Programme for grazing management'
+            'Consider rotational grazing to maximise utilisation', // Translate maximise, utilisation
+            'Check AHDB Better Returns Programme for grazing management' // Programme is already UK spelling
           ]
         },
         pork: {
@@ -122,7 +123,7 @@ export const simulateImageAnalysis = (sector) => {
           ]
         }
       };
-      
+
       resolve(results[sector]);
     }, 2000);
   });
@@ -139,8 +140,8 @@ export const getAIResponse = (sector, question) => {
     setTimeout(() => {
       let response;
       question = question.toLowerCase();
-      
-      if (question.includes('fertiliser') || question.includes('fertilizer')) {
+
+      if (question.includes('fertiliser') || question.includes('fertilizer')) { // Keep both for input, translate output
         if (sector === 'cereals') {
           response = 'For your winter wheat at this growth stage, I recommend following AHDB RB209 guidance with 180-220 kg N/ha split across 3 applications. Consider sulphur application (50-75 kg SO₃/ha) if soil indices suggest deficiency.';
         } else if (sector === 'dairy') {
@@ -163,18 +164,18 @@ export const getAIResponse = (sector, question) => {
       } else {
         response = 'Thank you for your question. AHDB has extensive resources on this topic. Based on your farm profile and current conditions in your region, I recommend checking the AHDB Knowledge Library or Evidence for Farming Initiative. Would you like more specific advice about crop protection, livestock management, or market information?';
       }
-      
+
       resolve(response);
     }, 1000);
   });
 };
 
 /**
- * Get status color classes based on trend or status text
+ * Get status colour classes based on trend or status text
  * @param {string} text - Trend or status text
  * @returns {string} Tailwind CSS classes
  */
-export const getStatusColorClasses = (text) => {
+export const getStatusColorClasses = (text) => { // Keep Color in function name for consistency
   if (text.includes('↑') || text.includes('rising') || text.includes('strong') || text.includes('Positive')) {
     return 'bg-green-50 text-green-600';
   } else if (text.includes('↓') || text.includes('pressure') || text.includes('down')) {
@@ -193,20 +194,20 @@ export const getStatusColorClasses = (text) => {
 export const getPublicationName = (sector, index) => {
   switch(sector) {
     case 'cereals':
-      return index === 1 ? 'Wheat Growth Guide' : 
-             index === 2 ? 'Recommended Lists 2025/26' : 
+      return index === 1 ? 'Wheat Growth Guide' :
+             index === 2 ? 'Recommended Lists 2025/26' :
              `Arable Publication ${index}`;
     case 'dairy':
-      return index === 1 ? 'Forage for Knowledge' : 
-             index === 2 ? 'Mastitis Control Plan' : 
+      return index === 1 ? 'Forage for Knowledge' :
+             index === 2 ? 'Mastitis Control Plan' :
              `Dairy Publication ${index}`;
     case 'beef':
-      return index === 1 ? 'Better Returns Programme' : 
-             index === 2 ? 'Beef & Lamb Selection' : 
+      return index === 1 ? 'Better Returns Programme' : // Programme is already UK spelling
+             index === 2 ? 'Beef & Lamb Selection' :
              `Beef & Lamb Publication ${index}`;
     case 'pork':
-      return index === 1 ? 'Pig Health & Performance' : 
-             index === 2 ? 'Practical Pig Guide' : 
+      return index === 1 ? 'Pig Health & Performance' :
+             index === 2 ? 'Practical Pig Guide' :
              `Pork Publication ${index}`;
     default:
       return `Publication ${index}`;

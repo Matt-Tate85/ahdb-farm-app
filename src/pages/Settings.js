@@ -1,3 +1,4 @@
+// Settings.js
 import React, { useState } from 'react';
 import { useSector } from '../contexts/SectorContext';
 import { Settings as SettingsIcon, User, Bell, Lock, Download, Globe, HelpCircle, Smartphone, Shield, ChevronRight, Edit } from 'lucide-react';
@@ -29,14 +30,14 @@ const Settings = () => {
         <SettingsIcon size={20} className="mr-2" />
         Settings
       </h2>
-      
+
       <div className="bg-white rounded-lg shadow">
         <div className="p-4 border-b">
           <h3 className="font-medium mb-3 flex items-center">
             <User size={18} className="mr-2 text-blue-500" />
             Account Settings
           </h3>
-          
+
           <div className="flex items-center justify-between py-2">
             <div className="flex-1">
               <div className="text-sm font-medium">James Wilson</div>
@@ -46,7 +47,7 @@ const Settings = () => {
               <Edit size={16} />
             </button>
           </div>
-          
+
           <div className="flex items-center justify-between py-2">
             <div className="flex-1">
               <div className="text-sm font-medium">Farm Details</div>
@@ -56,12 +57,12 @@ const Settings = () => {
               <Edit size={16} />
             </button>
           </div>
-          
+
           <div className="flex items-center justify-between py-2">
             <div className="flex-1">
               <div className="text-sm font-medium">Main Enterprise</div>
               <div className="text-xs text-gray-500">
-                {selectedSector === 'cereals' ? 'Arable' : 
+                {selectedSector === 'cereals' ? 'Arable' :
                  selectedSector === 'dairy' ? 'Dairy' :
                  selectedSector === 'beef' ? 'Beef & Sheep' :
                  'Pig Production'}
@@ -72,13 +73,13 @@ const Settings = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="p-4 border-b">
           <h3 className="font-medium mb-3 flex items-center">
             <Bell size={18} className="mr-2 text-green-600" />
             Notification Preferences
           </h3>
-          
+
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div>
@@ -86,57 +87,57 @@ const Settings = () => {
                 <div className="text-xs text-gray-500">Receive price alerts and market intelligence</div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
                   checked={notifications.marketUpdates}
                   onChange={() => toggleNotification('marketUpdates')}
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
               </label>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm font-medium">Weather Alerts</div>
                 <div className="text-xs text-gray-500">Receive alerts for extreme weather conditions</div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
                   checked={notifications.weatherAlerts}
                   onChange={() => toggleNotification('weatherAlerts')}
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
               </label>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm font-medium">Events Reminders</div>
                 <div className="text-xs text-gray-500">Receive reminders for upcoming AHDB events</div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
                   checked={notifications.events}
                   onChange={() => toggleNotification('events')}
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
               </label>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm font-medium">News Updates</div>
                 <div className="text-xs text-gray-500">Receive AHDB industry news and updates</div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
                   checked={notifications.newsUpdates}
                   onChange={() => toggleNotification('newsUpdates')}
                 />
@@ -145,13 +146,13 @@ const Settings = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="p-4 border-b">
           <h3 className="font-medium mb-3 flex items-center">
             <Globe size={18} className="mr-2 text-purple-600" />
             App Settings
           </h3>
-          
+
           <div className="space-y-2">
             <div className="flex items-center justify-between py-2">
               <div className="text-sm">Language</div>
@@ -160,7 +161,7 @@ const Settings = () => {
                 <ChevronRight size={16} className="ml-1" />
               </div>
             </div>
-            
+
             <div className="flex items-center justify-between py-2">
               <div className="text-sm">Units</div>
               <div className="text-sm text-gray-500 flex items-center">
@@ -168,7 +169,7 @@ const Settings = () => {
                 <ChevronRight size={16} className="ml-1" />
               </div>
             </div>
-            
+
             <div className="flex items-center justify-between py-2">
               <div className="text-sm">Default Home Screen</div>
               <div className="text-sm text-gray-500 flex items-center">
@@ -178,13 +179,13 @@ const Settings = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="p-4">
           <h3 className="font-medium mb-3 flex items-center">
             <Download size={18} className="mr-2 text-amber-600" />
             Data Management
           </h3>
-          
+
           <div className="space-y-2">
             <div className="flex items-center justify-between py-2">
               <div>
@@ -195,7 +196,7 @@ const Settings = () => {
                 Export
               </button>
             </div>
-            
+
             <div className="flex items-center justify-between py-2">
               <div>
                 <div className="text-sm font-medium">Clear App Cache</div>
@@ -208,7 +209,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4 space-y-3">
         <button className="w-full text-left flex items-center justify-between p-2 hover:bg-gray-50 rounded">
           <div className="flex items-center">
@@ -217,7 +218,7 @@ const Settings = () => {
           </div>
           <ChevronRight size={16} className="text-gray-400" />
         </button>
-        
+
         <button className="w-full text-left flex items-center justify-between p-2 hover:bg-gray-50 rounded">
           <div className="flex items-center">
             <Shield size={18} className="mr-2 text-green-600" />
@@ -225,7 +226,7 @@ const Settings = () => {
           </div>
           <ChevronRight size={16} className="text-gray-400" />
         </button>
-        
+
         <button className="w-full text-left flex items-center justify-between p-2 hover:bg-gray-50 rounded">
           <div className="flex items-center">
             <HelpCircle size={18} className="mr-2 text-purple-600" />
@@ -233,7 +234,7 @@ const Settings = () => {
           </div>
           <ChevronRight size={16} className="text-gray-400" />
         </button>
-        
+
         <button className="w-full text-left flex items-center justify-between p-2 hover:bg-gray-50 rounded">
           <div className="flex items-center">
             <Smartphone size={18} className="mr-2 text-amber-600" />
@@ -242,7 +243,7 @@ const Settings = () => {
           <ChevronRight size={16} className="text-gray-400" />
         </button>
       </div>
-      
+
       <div className="text-center p-3">
         <button className="text-sm text-red-500">
           Sign Out

@@ -1,3 +1,4 @@
+// ResearchProjects.js
 import React, { useState } from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -26,8 +27,8 @@ const ResearchProjects = () => {
   const projects = [
     {
       id: 1,
-      title: selectedSector === 'cereals' ? 'Optimizing Nitrogen Use Efficiency in Winter Wheat' : 
-             selectedSector === 'dairy' ? 'Improving Forage Utilization in Dairy Systems' :
+      title: selectedSector === 'cereals' ? 'Optimising Nitrogen Use Efficiency in Winter Wheat' : // Translate Optimising
+             selectedSector === 'dairy' ? 'Improving Forage Utilisation in Dairy Systems' : // Translate Utilisation
              selectedSector === 'beef' ? 'Grass-based Finishing Systems for Beef Cattle' :
              'Reducing Antibiotic Usage in Commercial Pig Production',
       institution: 'University of Nottingham',
@@ -39,33 +40,33 @@ const ResearchProjects = () => {
     },
     {
       id: 2,
-      title: selectedSector === 'cereals' ? 'Climate-Resilient Crop Varieties' : 
+      title: selectedSector === 'cereals' ? 'Climate-Resilient Crop Varieties' :
              selectedSector === 'dairy' ? 'Transition Cow Management Strategies' :
              selectedSector === 'beef' ? 'Reducing Methane Emissions in Beef Systems' :
-             'Optimizing Indoor Environment for Pig Welfare',
+             'Optimising Indoor Environment for Pig Welfare', // Translate Optimising
       institution: 'Harper Adams University',
       status: 'Active',
       startDate: 'March 2024',
       endDate: 'February 2027',
       category: selectedSector === 'cereals' ? 'environment' : 'animal-health',
-      description: 'A comprehensive research program looking at adaptation strategies for farming systems to meet the challenges of climate change while maintaining productivity.'
+      description: 'A comprehensive research programme looking at adaptation strategies for farming systems to meet the challenges of climate change while maintaining productivity.' // Translate programme
     },
     {
       id: 3,
-      title: selectedSector === 'cereals' ? 'Integrated Pest Management in Arable Systems' : 
+      title: selectedSector === 'cereals' ? 'Integrated Pest Management in Arable Systems' :
              selectedSector === 'dairy' ? 'Genomic Selection for Improved Health Traits' :
-             selectedSector === 'beef' ? 'Optimizing Grassland Management for Beef Production' :
+             selectedSector === 'beef' ? 'Optimising Grassland Management for Beef Production' : // Translate Optimising
              'Precision Nutrition in Pig Production',
       institution: 'Rothamsted Research',
       status: 'Active',
       startDate: 'September 2024',
       endDate: 'August 2027',
       category: selectedSector === 'cereals' ? 'crop-protection' : 'productivity',
-      description: 'Investigating innovative approaches to reduce pest pressure while minimizing environmental impact through reduced chemical inputs and improved management practices.'
+      description: 'Investigating innovative approaches to reduce pest pressure while minimising environmental impact through reduced chemical inputs and improved management practices.' // Translate minimising
     },
     {
       id: 4,
-      title: selectedSector === 'cereals' ? 'Soil Health in Arable Rotations' : 
+      title: selectedSector === 'cereals' ? 'Soil Health in Arable Rotations' :
              selectedSector === 'dairy' ? 'Sustainable Protein Sources in Dairy Rations' :
              selectedSector === 'beef' ? 'Improving Beef Supply Chain Resilience' :
              'Novel Disease Surveillance Methods in Pig Herds',
@@ -79,23 +80,23 @@ const ResearchProjects = () => {
   ];
 
   // Filter projects based on selected category
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
+  const filteredProjects = activeCategory === 'all'
+    ? projects
     : projects.filter(project => project.category === activeCategory);
 
   return (
     <div className="p-4 space-y-4">
       <h2 className="text-lg font-semibold text-gray-700">AHDB Research Projects</h2>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
             <Beaker size={18} className="mr-2 text-blue-500" />
             Research Projects
           </h3>
-          <button 
+          <button
             className="flex items-center text-sm text-gray-700 px-3 py-1 rounded-lg border border-gray-300"
             onClick={() => setFilterOpen(!filterOpen)}
           >
@@ -103,7 +104,7 @@ const ResearchProjects = () => {
             Filter
           </button>
         </div>
-        
+
         {filterOpen && (
           <div className="mb-4 p-3 bg-gray-50 rounded-lg">
             <div className="text-sm font-medium mb-2">Filter by category:</div>
@@ -112,8 +113,8 @@ const ResearchProjects = () => {
                 <button
                   key={category.id}
                   className={`px-3 py-1 text-xs rounded-full ${
-                    activeCategory === category.id 
-                      ? 'bg-blue-500 text-white' 
+                    activeCategory === category.id
+                      ? 'bg-blue-500 text-white'
                       : 'bg-white text-gray-700 border border-gray-300'
                   }`}
                   onClick={() => setActiveCategory(category.id)}
@@ -124,21 +125,21 @@ const ResearchProjects = () => {
             </div>
           </div>
         )}
-        
+
         <div className="space-y-4">
           {filteredProjects.map(project => (
             <div key={project.id} className="border rounded-lg p-4">
               <div className="flex justify-between items-start mb-2">
                 <h4 className="text-base font-medium">{project.title}</h4>
                 <span className={`text-xs px-2 py-1 rounded-full ${
-                  project.status === 'Active' 
-                    ? 'bg-green-50 text-green-600' 
+                  project.status === 'Active'
+                    ? 'bg-green-50 text-green-600'
                     : 'bg-gray-100 text-gray-600'
                 }`}>
                   {project.status}
                 </span>
               </div>
-              
+
               <div className="flex flex-wrap text-xs text-gray-600 mb-3 gap-y-1">
                 <div className="flex items-center mr-4">
                   <Users size={14} className="mr-1" />
@@ -149,9 +150,9 @@ const ResearchProjects = () => {
                   {project.startDate} - {project.endDate}
                 </div>
               </div>
-              
+
               <p className="text-sm text-gray-700 mb-3">{project.description}</p>
-              
+
               <div className="flex justify-between items-center">
                 <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-full">
                   {categories.find(cat => cat.id === project.category)?.label || 'Research'}
@@ -163,18 +164,26 @@ const ResearchProjects = () => {
               </div>
             </div>
           ))}
+
+          {filteredProjects.length === 0 && (
+            <div className="p-4 text-center text-gray-500">
+              <Beaker size={32} className="mx-auto mb-2 text-gray-400" />
+              <p>No research projects found matching your criteria</p>
+              <p className="text-sm mt-1">Try adjusting your filters</p>
+            </div>
+          )}
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <h3 className="font-medium mb-3">Get Involved in Research</h3>
-        
+
         <p className="text-sm text-gray-700 mb-3">
           AHDB is always looking for farmers to participate in research trials and demonstration farms.
           By getting involved, you can help shape future farming practices and gain early access to
           innovative approaches.
         </p>
-        
+
         <button className="w-full py-2 rounded-lg bg-green-600 text-white">
           Register Interest
         </button>

@@ -1,3 +1,4 @@
+// FarmRecord.js
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
 import { useSector } from '../contexts/SectorContext';
@@ -18,7 +19,7 @@ const FarmRecord = () => {
   ];
 
   const recentActivities = [
-    { date: '10 May 2025', activity: 'Fertilizer Application', field: 'Long Field', details: 'N: 180kg/ha, P: 30kg/ha' },
+    { date: '10 May 2025', activity: 'Fertiliser Application', field: 'Long Field', details: 'N: 180kg/ha, P: 30kg/ha' }, // Translate here
     { date: '05 May 2025', activity: 'Pest Monitoring', field: 'Home Paddock', details: 'Pollen beetle counts below threshold' },
     { date: '02 May 2025', activity: 'Soil Testing', field: 'River Meadow', details: 'pH: 6.8, P: 2, K: 2+' }
   ];
@@ -32,9 +33,9 @@ const FarmRecord = () => {
           Edit Farm Details
         </button>
       </div>
-      
+
       <SectorSelector />
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -42,11 +43,11 @@ const FarmRecord = () => {
             Farm Overview
           </h3>
         </div>
-        
+
         <div className="h-40 bg-blue-200 rounded-lg flex justify-center items-center mb-4">
           <span className="text-white">Farm map would display here</span>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="border rounded-lg p-3">
             <div className="text-sm font-medium">Total Area</div>
@@ -63,7 +64,7 @@ const FarmRecord = () => {
           <div className="border rounded-lg p-3">
             <div className="text-sm font-medium">Main Enterprises</div>
             <div className="text-lg">
-              {selectedSector === 'cereals' ? 'Arable' : 
+              {selectedSector === 'cereals' ? 'Arable' :
                selectedSector === 'dairy' ? 'Dairy' :
                selectedSector === 'beef' ? 'Beef & Sheep' :
                'Pig Production'}
@@ -71,7 +72,7 @@ const FarmRecord = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -82,7 +83,7 @@ const FarmRecord = () => {
             Add Field
           </button>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -106,7 +107,7 @@ const FarmRecord = () => {
           </table>
         </div>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium flex items-center">
@@ -117,7 +118,7 @@ const FarmRecord = () => {
             Record Activity
           </button>
         </div>
-        
+
         <div className="space-y-3">
           {recentActivities.map((activity, i) => (
             <div key={i} className="p-3 border rounded-lg">

@@ -63,28 +63,30 @@ const SideMenu = ({ isOpen, onClose }) => {
         onClick={onClose}
         aria-hidden="true"
       ></div>
-      <div className="absolute top-0 left-0 bottom-0 w-64 bg-white shadow-lg">
+      {/* Side Menu Container */}
+      <div className="absolute top-0 left-0 bottom-0 w-64 bg-white shadow-lg flex flex-col"> {/* Added flex flex-col */}
         {/* Side Menu Header */}
         <div
-          className="p-4 flex justify-between items-center" // Removed text-white and bg-blue-500
+          className="p-4 flex justify-between items-center flex-shrink-0" // Added flex-shrink-0
           style={{
             backgroundColor: COLORS.ahdbBlue, // Set background to ahdbBlue
-            color: COLORS.white, // Set text color to credible
+            color: COLORS.credible, // Set default text color for the header div
           }}
         >
-          <span className="font-semibold">AHDB Resources</span>
+          {/* Changed text color of this span to white */}
+          <span className="font-semibold" style={{ color: '#fff' }}>AHDB Resources</span>
           <button
             onClick={onClose}
             className="" // Removed text-white, color is set by parent header style
             aria-label="Close menu"
-            style={{ color: COLORS.white}} // Explicitly set button color
+            style={{ color: COLORS.credible }} // Explicitly set button color
           >
             <X size={24} />
           </button>
         </div>
 
-        {/* Side Menu Content */}
-        <div className="p-4">
+        {/* Side Menu Content - Made scrollable */}
+        <div className="p-4 flex-grow overflow-y-auto"> {/* Added flex-grow and overflow-y-auto */}
           {/* User Info Section */}
           <div className="mb-6">
             {/* These text colors are currently hardcoded or using default gray.
@@ -97,11 +99,51 @@ const SideMenu = ({ isOpen, onClose }) => {
             <div className="text-sm text-gray-700">Yorkshire, UK</div>
           </div>
 
+          {/* Sector Selection Section */}
+          <div className="mb-4">
+            <h3 className="text-sm font-medium mb-2 text-gray-700">AHDB Sectors</h3> {/* Keeping original text color for contrast on white */}
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => handleSectorChange('cereals')}
+                className={`py-2 px-1 text-xs rounded border ${selectedSector === 'cereals' ? 'font-semibold' : 'font-medium'}`} // Added border class
+                style={getSectorButtonStyles('cereals')} // Apply dynamic styles
+                aria-pressed={selectedSector === 'cereals'}
+              >
+                Cereals & Oilseeds
+              </button>
+              <button
+                onClick={() => handleSectorChange('dairy')}
+                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'dairy' ? 'font-semibold' : 'font-medium'}`} // Added border class
+                style={getSectorButtonStyles('dairy')} // Apply dynamic styles
+                aria-pressed={selectedSector === 'dairy'}
+              >
+                Dairy
+              </button>
+              <button
+                onClick={() => handleSectorChange('beef')}
+                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'beef' ? 'font-semibold' : 'font-medium'}`} // Added border class
+                style={getSectorButtonStyles('beef')} // Apply dynamic styles
+                aria-pressed={selectedSector === 'beef'}
+              >
+                Beef & Lamb
+              </button>
+              <button
+                onClick={() => handleSectorChange('pork')}
+                 className={`py-2 px-1 text-xs rounded border ${selectedSector === 'pork' ? 'font-semibold' : 'font-medium'}`} // Added border class
+                style={getSectorButtonStyles('pork')} // Apply dynamic styles
+                aria-pressed={selectedSector === 'pork'}
+              >
+                Pork
+              </button>
+            </div>
+          </div>
+
           {/* Main Navigation Items */}
           <ul className="space-y-1">
             {SIDE_MENU_ITEMS.map((item) => {
               const IconComponent = LucideIcons[item.icon];
               // Apply credible color unless item has a specific class (like logout)
+              // Also ensure the icon color matches the text color
               const itemColor = item.className ? undefined : COLORS.credible;
               const itemStyle = itemColor ? { color: itemColor } : {};
 
@@ -112,7 +154,8 @@ const SideMenu = ({ isOpen, onClose }) => {
                   className={`p-2 hover:bg-gray-100 rounded cursor-pointer flex items-center ${item.className || ''}`} // Removed default text-gray-700
                   style={itemStyle} // Apply credible color style
                 >
-                  {IconComponent && <IconComponent size={16} className="mr-2" style={itemColor ? { color: itemColor } : {}} />} {/* Apply credible color to icon too */}
+                  {/* Apply credible color to icon too */}
+                  {IconComponent && <IconComponent size={16} className="mr-2" style={itemColor ? { color: itemColor } : {}} />}
                   {item.label}
                 </li>
               );

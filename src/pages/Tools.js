@@ -29,15 +29,21 @@ const Tools = () => {
                'Pig Production Calculator'}
             </div>
             <div className="text-xs mt-1">
-              {selectedSector === 'cereals' ? 'Calculate fertiliser requirements' : // Translate fertiliser
-               selectedSector === 'dairy' ? 'Optimise feed rations' : // Translate Optimise
+              {selectedSector === 'cereals' ? 'Calculate fertiliser requirements' :
+               selectedSector === 'dairy' ? 'Optimise feed rations' :
                selectedSector === 'beef' ? 'Select animals for market' :
                'Calculate production costs'}
             </div>
           </div>
           <div className="p-3 border rounded-lg border-green-600">
-            <div className="text-sm font-medium text-green-600">AHDB Farmbench</div>
-            <div className="text-xs mt-1">Benchmark your farm performance</div>
+            <div className="text-sm font-medium text-green-600">
+              {/* Conditional display for AHDB Farmbench or Recommended List */}
+              {selectedSector === 'cereals' ? 'Recommended List' : 'AHDB Farmbench'}
+              </div>
+            <div className="text-xs mt-1">
+              {/* Conditional description based on the displayed tool */}
+              {selectedSector === 'cereals' ? 'View recommended crop varieties' : 'Benchmark your farm performance'}
+              </div>
           </div>
           <div className="p-3 border rounded-lg border-green-600">
             <div className="text-sm font-medium text-green-600">
@@ -49,7 +55,7 @@ const Tools = () => {
             <div className="text-xs mt-1">
               {selectedSector === 'cereals' ? 'Plan spray applications' :
                selectedSector === 'dairy' ? 'Compare milk contracts' :
-               selectedSector === 'beef' ? 'Optimise grazing rotation' : // Translate Optimise
+               selectedSector === 'beef' ? 'Optimise grazing rotation' :
                'Track finishing performance'}
             </div>
           </div>
@@ -76,7 +82,7 @@ const Tools = () => {
               <div className="text-sm font-medium">
                 {selectedSector === 'cereals' ? 'Wheat Growth Guide' :
                  selectedSector === 'dairy' ? 'Forage for Knowledge' :
-                 selectedSector === 'beef' ? 'Better Returns Programme' : // Programme is already UK spelling
+                 selectedSector === 'beef' ? 'Better Returns Programme' :
                  'Pig Health & Performance'}
               </div>
               <div className="text-xs text-gray-500">Updated: May 2025</div>

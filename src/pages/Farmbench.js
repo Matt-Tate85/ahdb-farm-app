@@ -1,11 +1,11 @@
-// Farmbench.js
 import React from 'react';
 import SectorSelector from '../components/common/SectorSelector';
+import PerformanceTrendChart from './PerformanceTrendChart';
 import { useSector } from '../contexts/SectorContext';
 import { BarChart2, TrendingUp, Award, ArrowUp, ArrowDown } from 'lucide-react';
 
 /**
- * Farmbench Page
+ * Farmbench Page with integrated Performance Trend Chart
  * AHDB's farm benchmarking tool
  */
 const Farmbench = () => {
@@ -22,7 +22,7 @@ const Farmbench = () => {
       ],
       position: 'Top 25%',
       summary: 'Your cereal enterprise is performing well, with yields above and costs below the national average.',
-      recommendations: [ // Added tailored recommendations
+      recommendations: [
         'Explore advanced variety selection tools in the Knowledge Library to potentially further increase yields.',
         'Review your fertiliser application timing and rates using the RB209 calculator to optimise nutrient use efficiency.',
         'Benchmark your machinery costs in more detail using the Machinery Cost Calculator to identify potential savings.'
@@ -37,7 +37,7 @@ const Farmbench = () => {
       ],
       position: 'Top 25%',
       summary: 'Your dairy enterprise is showing strong performance with good cost control and above average yields.',
-      recommendations: [ // Added tailored recommendations
+      recommendations: [
         'Utilise the Feed Planning Tool to fine-tune rations and potentially improve feed efficiency further.',
         'Benchmark your heifer rearing costs using the Heifer Rearing Calculator.',
         'Review the latest AHDB research on mastitis control programmes in the Knowledge Library.'
@@ -52,7 +52,7 @@ const Farmbench = () => {
       ],
       position: 'Top 25%',
       summary: 'Your beef enterprise is performing well with good growth rates and cost efficiency compared to similar farms.',
-      recommendations: [ // Added tailored recommendations
+      recommendations: [
         'Explore the Grazing Planning Tool to optimise grass utilisation and grazing rotation.',
         'Benchmark your suckler herd performance against other farms using Farmbench.',
         'Review the AHDB Beef & Lamb selection resources to ensure optimal animal performance.'
@@ -67,7 +67,7 @@ const Farmbench = () => {
       ],
       position: 'Top 25%',
       summary: 'Your pig enterprise shows strong technical performance with good breeding productivity and feed efficiency.',
-      recommendations: [ // Added tailored recommendations
+      recommendations: [
         'Utilise the Pig Production Calculator to track and analyse key performance indicators in more detail.',
         'Review AHDB guidance on optimising indoor environments for pig welfare.',
         'Explore the latest research on reducing antibiotic usage in the Research Projects section.'
@@ -115,7 +115,7 @@ const Farmbench = () => {
           ))}
         </div>
 
-         {/* Tailored Recommendations Section */}
+        {/* Tailored Recommendations Section */}
         {currentData.recommendations && currentData.recommendations.length > 0 && (
             <div className="mt-4 pt-4 border-t border-gray-100">
                 <h4 className="font-medium mb-2">Tailored AHDB Recommendations:</h4>
@@ -127,7 +127,7 @@ const Farmbench = () => {
             </div>
         )}
 
-        <button className="w-full py-2 rounded-lg bg-blue-500 text-white mt-4"> {/* Adjusted margin-top */}
+        <button className="w-full py-2 rounded-lg bg-blue-500 text-white mt-4">
           View Full Benchmarking Report
         </button>
       </div>
@@ -138,13 +138,14 @@ const Farmbench = () => {
             <TrendingUp size={18} className="mr-2 text-blue-500" />
             3-Year Performance Trend
           </h3>
+          <div className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded">
+            2023-2025
+          </div>
         </div>
 
-        <div className="h-64 bg-gray-50 rounded-lg flex justify-center items-center p-4 mb-4">
-          <div className="text-center text-gray-500">
-            <BarChart2 size={40} className="mx-auto mb-2 text-gray-400" />
-            <span>Performance trends chart would display here</span>
-          </div>
+        {/* Integrated Performance Trend Chart */}
+        <div className="rounded-lg mb-4">
+          <PerformanceTrendChart />
         </div>
 
         <div className="text-sm text-gray-700">
